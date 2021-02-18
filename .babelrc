@@ -1,0 +1,6 @@
+// .babelrc
+
+{
+  "presets": ["env", "react"], // Babel search for ES2015+ files + JSX files
+  "plugins": ["transform-class-properties"] // add methods to React components as arrow functions
+}
