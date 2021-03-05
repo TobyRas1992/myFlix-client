@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReturnButton } from '../return-button/return-button';
 
 export class MovieView extends React.Component {
   constructor() {
@@ -6,6 +7,11 @@ export class MovieView extends React.Component {
     this.state = {};
   }
 
+  onReturnClick() {
+    this.setState({
+      selectedMovie: null
+    });
+  }
   render() {
     const { movie } = this.props;
 
@@ -29,6 +35,9 @@ export class MovieView extends React.Component {
         <div className="movie-director">
           <span className="label">Director: </span>
           <span className="value">{movie.Director.Name}</span>
+        </div>
+        <div className="exit-button">
+          <ReturnButton onClick={this.onReturnClick()} />
         </div>
       </div>
     );
