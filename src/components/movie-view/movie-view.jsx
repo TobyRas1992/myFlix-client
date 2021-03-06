@@ -7,11 +7,6 @@ export class MovieView extends React.Component {
     this.state = {};
   }
 
-  onReturnClick() {
-    this.setState({
-      selectedMovie: null
-    });
-  }
   render() {
     const { movie } = this.props;
 
@@ -37,7 +32,7 @@ export class MovieView extends React.Component {
           <span className="value">{movie.Director.Name}</span>
         </div>
         <div className="exit-button">
-          <ReturnButton onClick={this.onReturnClick()} />
+          <ReturnButton onClick={this.props.onReturnClick} />
         </div>
       </div>
     );

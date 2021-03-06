@@ -31689,7 +31689,7 @@ var ReturnButton = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var onReturnClick = this.props.onReturnClick;
-      return _react.default.createElement("div", {
+      return _react.default.createElement("button", {
         onClick: function onClick() {
           return onReturnClick();
         },
@@ -31754,13 +31754,6 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(MovieView, [{
-    key: "onReturnClick",
-    value: function onReturnClick() {
-      this.setState({
-        selectedMovie: null
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
       var movie = this.props.movie;
@@ -31797,7 +31790,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, movie.Director.Name)), _react.default.createElement("div", {
         className: "exit-button"
       }, _react.default.createElement(_returnButton.ReturnButton, {
-        onClick: this.onReturnClick()
+        onClick: this.props.onReturnClick
       })));
     }
   }]);
@@ -31887,6 +31880,14 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "onReturnClick",
+    value: function onReturnClick() {
+      // I think I need a param for this?
+      this.setState({
+        selectedMovie: null
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -31900,7 +31901,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       return _react.default.createElement("div", {
         className: "main-view"
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
-        movie: selectedMovie
+        movie: selectedMovie,
+        onReturnClick: function onReturnClick() {
+          return _this3.onReturnClick();
+        }
       }) : movies.map(function (movie) {
         return _react.default.createElement(_movieCard.MovieCard, {
           key: movie._id,
@@ -32078,7 +32082,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58744" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64313" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
