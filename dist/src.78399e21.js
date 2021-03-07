@@ -31688,10 +31688,10 @@ var ReturnButton = /*#__PURE__*/function (_React$Component) {
   _createClass(ReturnButton, [{
     key: "render",
     value: function render() {
-      var onReturnClick = this.props.onReturnClick;
+      var _onClick = this.props.onClick;
       return _react.default.createElement("button", {
         onClick: function onClick() {
-          return onReturnClick();
+          return _onClick();
         },
         className: "return-button"
       }, "Return to main page");
@@ -32082,7 +32082,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64313" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49457" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -7,7 +7,7 @@ export class ReturnButton extends React.Component {
   }
 
   render() {
-    const { onReturnClick } = this.props;
-    return <button onClick={() => onReturnClick()} className="return-button">Return to main page</button>
+    const { onClick } = this.props;
+    return <button onClick={() => onClick()} className="return-button">Return to main page</button>
   }
 }
