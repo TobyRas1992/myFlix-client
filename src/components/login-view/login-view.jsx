@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './login-view.scss';
 
-export function LoginView(props) {
+function LoginView(props) {
   const [username, setUsername] = useState(''); // assigns empty string + update method 
   const [password, setPassword] = useState(''); // assigns empty string + update method
 
@@ -28,5 +28,11 @@ export function LoginView(props) {
       <button type="submit" onClick={handleSubmit}>Submit</button>
     </form>
   );
-
 }
+
+// Fix this
+LoginView.PropTypes = {
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired
+}
+export default LoginView;
