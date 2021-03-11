@@ -1,5 +1,8 @@
 import React from 'react';
 import { ReturnButton } from '../return-button/return-button';
+import PropTypes from 'prop-types';
+
+import './movie-view.scss';
 
 export class MovieView extends React.Component {
   constructor() {
@@ -36,5 +39,24 @@ export class MovieView extends React.Component {
         </div>
       </div>
     );
+  }
+  MovieView.propTypes = {
+    movie: PropTypes.shape({
+      Title: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+      ImagePath: PropTypes.string.isRequired,
+      Released: PropTypes.string,
+      Actors: PropTypes.array,
+      Director: PropTypes.shape({
+        Name: PropTypes.string.isRequired,
+        Bio: PropTypes.string,
+        Birth: PropTypes.string,
+        Death: PropTypes.string
+      }),
+      Genre: PropTypes.shape({
+        Name: PropTypes.string.isRequired,
+        Description: PropTypes.string.isRequired
+      })
+    })
   }
 }

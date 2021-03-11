@@ -1,15 +1,20 @@
 import React from 'react';
 import axios from 'axios';
+
+import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+
+import './main-view.scss';
 
 
 export class MainView extends React.Component {
   constructor() {
-    super(); // initialized the state so that I can access its attributes later
+    super();
     this.state = {
       movies: null,
-      selectedMovie: null
+      selectedMovie: null,
+      user: null
     };
   }
 
@@ -31,20 +36,30 @@ export class MainView extends React.Component {
       selectedMovie: movie
     });
   }
-  onReturnClick() { // I think I need a param for this?
+  onReturnClick() {
     this.setState({
       selectedMovie: null
     });
   }
 
-  render() {
-    const { movies, selectedMovie } = this.state;
+  onLoggedIn(user) {
+    this.setState({
+      user
+    });
+  }
 
+  render() {
+    const { movies, selectedMovie, user } = this.state;
+
+    // If there us no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+
+    // Before the movies have been loaded
     if (!movies) return <div className="main-view" />;
 
     return (
       <div className="main-view">
-        {selectedMovie
+        {selectedMovie /* If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/
           ? <MovieView movie={selectedMovie} onReturnClick={() => this.onReturnClick()} />
           : movies.map(movie => (
             <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
