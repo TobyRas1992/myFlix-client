@@ -5,33 +5,82 @@ import PropTypes from 'prop-types';
 
 
 function RegistrationView(props) {
-  const [username, setUsername] = useState(''); // assigns empty string + update method 
-  const [password, setPassword] = useState(''); // assigns empty string + update method
-  const [email, setEmail] = useState('');
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    username: ""
+  });
 
-  const handleSubmit = () => {
-    e.preventDefault(); //prevents default refresh/change page
-    console.log(username, password);
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);
+  const handleChange = (e) => {
+    const { id, value } = e.target
+    setState(prevState => ({
+      ...prevState,
+      [id]: value
+    }))
   };
+
+  const handleSubmitClick = (e) => {
+    e.preventDefault();
+    if (state.password === state.confirmPassword) {
+      sendDetailsToServer()
+    } else {
+      props.showError('Passwords do not match');
+    }
+  };
+
+  const sendDetailsToServer = () => {
+    if (state.email.lenght && state.password.length && state.username.length) {
+      props.showError(null);
+      const payload = {
+        "Username": state.username,
+        "Password": state.password,
+        "Email": state.email
+      }
+    }
+  }
+
+  let userSchema = mongoose.Schema({
+    Username: { type: String, required: true },
+    Password: { type: String, required: true },
+    Email: { type: String, required: true },
+    Birthday: Date,
+    FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }]
+  });
 
   return (
     <form>
       <label>Register new user</label>
       <label>
         Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+        <input type="text" value={userName} onChange={handleChange} />
       </label>
       <label>
         Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <input type="password" value={password} onChange={handleChange} />
       </label>
-      <button type="submit" onClick={handleSubmit}>Submit</button>
+      <label>
+        Confirm Password:
+        <input type="password" value={confirmPassword} onChange={handleChange} />
+      </label>
+      <label>
+        Birthday:
+        <input type="date" value={ } />
+      </label>
+      <label>
+        Email:
+        <input type="email" value={email} onChange={handleChange} />
+      </label>
+      <small>We'll never share your email with anyone else.</small>
+      <button type="submit" onClick={handleSubmitClick}>Register</button>
     </form>
   );
+}
 
+RegistrationView.propTypes = {
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired
 }
 
 export default RegistrationView;
