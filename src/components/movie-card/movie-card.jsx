@@ -5,7 +5,7 @@ import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
-    // creates variables from the props passed from MainView
+    // creates variables from the props passed from MainView - uses destructuring
     const { movie, onClick } = this.props;
 
     return (

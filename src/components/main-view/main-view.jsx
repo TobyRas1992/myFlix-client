@@ -9,10 +9,11 @@ import { MovieView } from '../movie-view/movie-view';
 
 import './main-view.scss';
 
-
+// extends the React.Component class to inherit lifecycle methods
 export class MainView extends React.Component {
   constructor() {
     super();
+    // Initialize state with empty values 
     this.state = {
       movies: null,
       selectedMovie: null,
@@ -24,7 +25,7 @@ export class MainView extends React.Component {
   componentDidMount() {
     axios.get('https://my-movie-overview.herokuapp.com/movies')
       .then(response => {
-        // Assign the result to the state
+        // Assign the result to the state + tells DOM state has changed
         this.setState({
           movies: response.data
         });
@@ -34,6 +35,7 @@ export class MainView extends React.Component {
       });
   }
 
+  // FUNCTIONS
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
@@ -43,6 +45,10 @@ export class MainView extends React.Component {
     this.setState({
       selectedMovie: null
     });
+  }
+
+  onRegistrationClick() {
+    //code here 
   }
 
   onLoggedIn(user) {
