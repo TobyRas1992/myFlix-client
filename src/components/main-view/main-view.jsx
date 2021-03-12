@@ -63,7 +63,7 @@ export class MainView extends React.Component {
     return (
       <div className="main-view">
         {selectedMovie /* If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/
-          //props are passed to MovieView component
+          //props are passed to MovieView component + onReturnClick is also passed
           ? <MovieView movie={selectedMovie} onReturnClick={() => this.onReturnClick()} />
           //props are passed to MovieCard component with map()
           : movies.map(movie => (

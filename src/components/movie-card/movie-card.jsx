@@ -5,6 +5,7 @@ import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
+    // creates variables from the props passed from MainView
     const { movie, onClick } = this.props;
 
     return (
