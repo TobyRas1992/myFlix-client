@@ -2,6 +2,7 @@ import './registration-view.scss';
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 
 function RegistrationView(props) {
@@ -10,7 +11,8 @@ function RegistrationView(props) {
     password: "",
     confirmPassword: "",
     username: "",
-    birthday: ""
+    birthday: null,
+    succesMessage: null
   });
 
   const handleChange = (e) => {
@@ -39,6 +41,22 @@ function RegistrationView(props) {
         "Email": state.email,
         "Birthday": state.birthday
       }
+      axios.post('https://my-movie-overview.herokuapp.com/users/', payload)
+        .then(function (response) {
+          if (response.status === 200) {
+            setState(prevState => ({
+              ...prevState,
+              'succesMessage': 'Registration successful. Redirecting to home page..'
+            }))
+            redirectToHome();
+            props.showError("Some error ocurred");
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else {
+      props.showError('Please enter valid username and password')
     }
   }
 

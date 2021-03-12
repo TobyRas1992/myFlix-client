@@ -4,6 +4,7 @@ import axios from 'axios';
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
+// imports component that Mainview will pass props to
 import { MovieView } from '../movie-view/movie-view';
 
 import './main-view.scss';
@@ -23,6 +24,7 @@ export class MainView extends React.Component {
   componentDidMount() {
     axios.get('https://my-movie-overview.herokuapp.com/movies')
       .then(response => {
+        // Assign the result to the state
         this.setState({
           movies: response.data
         });
@@ -61,7 +63,9 @@ export class MainView extends React.Component {
     return (
       <div className="main-view">
         {selectedMovie /* If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/
+          //props are passed to MovieView component
           ? <MovieView movie={selectedMovie} onReturnClick={() => this.onReturnClick()} />
+          //props are passed to MovieCard component with map()
           : movies.map(movie => (
             <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
           ))
