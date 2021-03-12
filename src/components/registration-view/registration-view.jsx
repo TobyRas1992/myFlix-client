@@ -9,7 +9,8 @@ function RegistrationView(props) {
     email: "",
     password: "",
     confirmPassword: "",
-    username: ""
+    username: "",
+    birthday: ""
   });
 
   const handleChange = (e) => {
@@ -30,12 +31,13 @@ function RegistrationView(props) {
   };
 
   const sendDetailsToServer = () => {
-    if (state.email.lenght && state.password.length && state.username.length) {
+    if (state.email.lenght && state.password.length && state.username.length && state.birthday.length) {
       props.showError(null);
       const payload = {
         "Username": state.username,
         "Password": state.password,
-        "Email": state.email
+        "Email": state.email,
+        "Birthday": state.birthday
       }
     }
   }
@@ -65,7 +67,7 @@ function RegistrationView(props) {
       </label>
       <label>
         Birthday:
-        <input type="date" value={ } />
+        <input type="date" value={birthday} />
       </label>
       <label>
         Email:
