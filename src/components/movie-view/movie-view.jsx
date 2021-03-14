@@ -40,6 +40,7 @@ export class MovieView extends React.Component {
       </div>
     );
   }
+
   MovieView.propTypes = {
     movie: PropTypes.shape({
       Title: PropTypes.string.isRequired,
@@ -47,6 +48,7 @@ export class MovieView extends React.Component {
       ImagePath: PropTypes.string.isRequired,
       Released: PropTypes.string,
       Actors: PropTypes.array,
+      Featured: PropTypes.bool,
       Director: PropTypes.shape({
         Name: PropTypes.string.isRequired,
         Bio: PropTypes.string,

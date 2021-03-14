@@ -17,7 +17,8 @@ export class MainView extends React.Component {
     this.state = {
       movies: null,
       selectedMovie: null,
-      user: null
+      user: null,
+      hasAccount: true
     };
   }
 
@@ -36,34 +37,52 @@ export class MainView extends React.Component {
   }
 
   // FUNCTIONS
-  onMovieClick(movie) {
+
+  // Handler to navigate to RegistrationView from LoginView 
+  handleRegister = () => {
     this.setState({
-      selectedMovie: movie
+      hasAccount: false
     });
   }
-  onReturnClick() {
+  //Handler to return to LoginView from RegistrationView
+  handleReturnLogin = () => {
     this.setState({
-      selectedMovie: null
+      hasAccount: true
     });
   }
 
-  onRegistrationClick() {
-    //code here 
-  }
-
+  // Updates user in state on successful login
   onLoggedIn(user) {
     this.setState({
       user
     });
   }
 
-  render() {
-    const { movies, selectedMovie, user } = this.state;
+  //Handler to navigate from MainView to MovieView
+  onMovieClick(movie) {
+    this.setState({
+      selectedMovie: movie
+    });
+  }
+  //Handler to return from MovieView to MainView
+  onReturnClick() {
+    this.setState({
+      selectedMovie: null
+    });
+  }
 
-    // If there us no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
+
+
+  render() {
+    const { movies, selectedMovie, user, hasAccout } = this.state;
+
+    // on LoginView, when 'New User Sign Up' is clicked, goes to RegistrationView
+    if (!hasAccount) return < RegistrationView onReturnLogin={this.handleReturnLogin} />
+
+    // Renders LoginView if no user
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
-    // Before the movies have been loaded
+
     if (!movies) return <div className="main-view" />;
 
     return (

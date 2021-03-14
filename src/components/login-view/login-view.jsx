@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import './login-view.scss';
 
 function LoginView(props) {
-  const [username, setUsername] = useState(''); // assigns empty string + update method 
-  const [password, setPassword] = useState(''); // assigns empty string + update method
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { onRegister } = props; //what does this do, Andy?
 
   const handleSubmit = () => {
     e.preventDefault(); //prevents default refresh/change page
     console.log(username, password);
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
     props.onLoggedIn(username);
   };
 
@@ -25,12 +25,13 @@ function LoginView(props) {
         Password:
         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label>
-      <button type="submit" onClick={handleSubmit}>Submit</button>
+      <button type="submit" onClick={handleSubmit}>Login</button> {' '}
+      <small>Not a member yet?</small>
+      <span onClick={onRegister}>Sign up for free</span>
     </form>
   );
 }
 
-// Fix this
 LoginView.PropTypes = {
   username: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired
