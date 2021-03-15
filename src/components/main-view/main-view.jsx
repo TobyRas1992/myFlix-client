@@ -4,10 +4,8 @@ import axios from 'axios';
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
-// imports component that Mainview will pass props to
 import { MovieView } from '../movie-view/movie-view';
 
-import './main-view.scss';
 
 // extends the React.Component class to inherit lifecycle methods
 export class MainView extends React.Component {
@@ -39,7 +37,7 @@ export class MainView extends React.Component {
   // FUNCTIONS
 
   // Handler to navigate to RegistrationView from LoginView 
-  handleRegister = () => {
+  handleToRegister = () => {
     this.setState({
       hasAccount: false
     });
@@ -80,7 +78,7 @@ export class MainView extends React.Component {
     if (!hasAccount) return < RegistrationView onReturnLogin={this.handleReturnLogin} />
 
     // Renders LoginView if no user
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={this.handleToRegister} />;
 
 
     if (!movies) return <div className="main-view" />;
