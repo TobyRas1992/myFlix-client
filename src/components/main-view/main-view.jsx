@@ -6,6 +6,9 @@ import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 // extends the React.Component class to inherit lifecycle methods
 export class MainView extends React.Component {
@@ -84,16 +87,26 @@ export class MainView extends React.Component {
     if (!movies) return <div className="main-view" />;
 
     return (
-      <div className="main-view">
-        {selectedMovie /* If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/
-          //props are passed to MovieView component + onReturnClick is also passed
-          ? <MovieView movie={selectedMovie} onReturnClick={() => this.onReturnClick()} />
-          //props are passed to MovieCard component with map()
-          : movies.map(movie => (
-            <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
-          ))
+      <Row className="main-view justify-content-md-center">
+        {selectedMovie
+          ? (
+            <Row className="justify-content-md-center">
+              <Col md={8}>
+                <MovieView movie={selectedMovie} onBackClick={movie => this.onMovieClick(null)} />
+              </Col>
+            </Row>
+          )
+          : (
+            <Row className="justify-content-md-center">
+              {movies.map(movie => (
+                <Col md={3}>
+                  <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
+                </Col>
+              ))}
+            </Row>
+          )
         }
-      </div>
+      </Row>
     );
   }
 }
