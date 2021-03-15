@@ -74,7 +74,7 @@ export class MainView extends React.Component {
 
 
   render() {
-    const { movies, selectedMovie, user, hasAccout } = this.state;
+    const { movies, selectedMovie, user, hasAccount } = this.state;
 
     // on LoginView, when 'New User Sign Up' is clicked, goes to RegistrationView
     if (!hasAccount) return < RegistrationView onReturnLogin={this.handleReturnLogin} />

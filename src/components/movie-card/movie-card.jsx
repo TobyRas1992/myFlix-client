@@ -12,14 +12,13 @@ export class MovieCard extends React.Component {
       <div onClick={() => onClick(movie)} className="movie-card">{movie.Title}</div>
     );
   }
-
-  MovieCard.propTypes = {
-    movie: PropTypes.shape({
-      Title: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired,
-      ImagePath: PropTypes.string.isRequired,
-      Released: PropTypes.string,
-    }).isRequired,
-    onClick: PropTypes.func.isRequired
-  }
+}
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+    Released: PropTypes.string,
+  }).isRequired,
+  onClick: PropTypes.func.isRequired
 }
