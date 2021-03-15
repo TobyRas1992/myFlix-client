@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReturnButton } from '../return-button/return-button';
+import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 
 
