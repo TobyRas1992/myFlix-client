@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import './login-view.scss';
 
 function LoginView(props) {
   const [username, setUsername] = useState('');

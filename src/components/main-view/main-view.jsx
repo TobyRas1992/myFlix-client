@@ -9,6 +9,7 @@ import { MovieView } from '../movie-view/movie-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import './main-view.scss';
 
 // extends the React.Component class to inherit lifecycle methods
 export class MainView extends React.Component {
