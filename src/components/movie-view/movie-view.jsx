@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReturnButton } from '../return-button/return-button';
-import Card from 'react-bootstrap/Card';
+import { Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 
@@ -11,33 +11,55 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie } = this.props;
+    const { movie, onClick } = this.props;
 
     if (!movie) return null;
 
     return (
-      <div className="movie-view">
-        <img className="movie-poster" src={movie.ImagePath} />
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <span className="value">{movie.Genre.Name}</span>
-        </div>
-        <div className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.Director.Name}</span>
-        </div>
-        <div className="exit-button">
-          <ReturnButton onClick={this.props.onReturnClick} />
-        </div>
-      </div>
+      <Card className="movie-view">
+        <Card.Img className="movie-poster" variant="top" src={movie.ImagePath} />
+        <Card.Body>
+          <Card.Title className="movie-title">{movie.Title}</Card.Title>
+          <Card.Text className="movie-description">{movie.Description}</Card.Text>
+        </Card.Body>
+        <ListGroup className="list-group-flush">
+          <ListGroupItem className="movie-genre">
+            Genre: {movie.Genre.Name}
+          </ListGroupItem>
+          <ListGroupItem className="movie-director">
+            Director: {movie.Director.Name}
+          </ListGroupItem>
+          <ListGroupItem className="movie-actors">
+            Actors: {movie.Actors}
+          </ListGroupItem>
+          <ListGroupItem className="movie-released">
+            Released: {movie.Released}
+          </ListGroupItem>
+        </ListGroup>
+        <Button className="return-button" variant="info" onClick={() => onClick(movie)}>Return to Movie List</Button>
+      </Card>
+      // <div className="movie-view">
+      //   <img className="movie-poster" src={movie.ImagePath} />
+      //   <div className="movie-title">
+      //     <span className="label">Title: </span>
+      //     <span className="value">{movie.Title}</span>
+      //   </div>
+      //   <div className="movie-description">
+      //     <span className="label">Description: </span>
+      //     <span className="value">{movie.Description}</span>
+      //   </div>
+      //   <div className="movie-genre">
+      //     <span className="label">Genre: </span>
+      //     <span className="value">{movie.Genre.Name}</span>
+      //   </div>
+      //   <div className="movie-director">
+      //     <span className="label">Director: </span>
+      //     <span className="value">{movie.Director.Name}</span>
+      //   </div>
+      //   <div className="exit-button">
+      //     <ReturnButton onClick={this.props.onReturnClick} />
+      //   </div>
+      // </div>
     );
   }
 }
