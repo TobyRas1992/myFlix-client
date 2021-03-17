@@ -48124,7 +48124,7 @@ function LoginView(props) {
       password = _useState4[0],
       setPassword = _useState4[1];
 
-  var onRegister = props.onRegister; //what does this do, Andy?
+  var onRegister = props.onRegister;
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault(); //prevents default refresh/change page

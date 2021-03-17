@@ -9,7 +9,7 @@ function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { onRegister } = props; //what does this do, Andy?
+  const { onRegister } = props;
 
   const handleSubmit = (e) => {
     e.preventDefault(); //prevents default refresh/change page
