@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-import { RegistrationView } from '../registration-view/registration-view';
-import { LoginView } from '../login-view/login-view';
+import RegistrationView from '../registration-view/registration-view';
+import LoginView from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
@@ -79,7 +79,7 @@ export class MainView extends React.Component {
     const { movies, selectedMovie, user, hasAccount } = this.state;
 
     // on LoginView, when 'New User Sign Up' is clicked, goes to RegistrationView
-    if (!hasAccount) return < RegistrationView onReturnLogin={this.handleReturnLogin} />
+    if (!hasAccount) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} onReturnLogin={this.handleReturnLogin} />
 
     // Renders LoginView if no user
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={this.handleToRegister} />;

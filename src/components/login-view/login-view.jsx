@@ -11,7 +11,7 @@ function LoginView(props) {
 
   const { onRegister } = props; //what does this do, Andy?
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     e.preventDefault(); //prevents default refresh/change page
     console.log(username, password);
     props.onLoggedIn(username);
@@ -36,8 +36,8 @@ function LoginView(props) {
   );
 }
 
-LoginView.PropTypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
+LoginView.propTypes = {
+  username: PropTypes.string,
+  password: PropTypes.string
 }
 export default LoginView;
