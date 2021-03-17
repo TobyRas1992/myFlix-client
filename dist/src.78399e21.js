@@ -48614,25 +48614,25 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          hasAccount = _this$state.hasAccount; // on LoginView, when 'New User Sign Up' is clicked, goes to RegistrationView
-
-      if (!hasAccount) return _react.default.createElement(_registrationView.default, {
-        onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
-        },
-        onReturnLogin: this.handleReturnLogin
-      }); // Renders LoginView if no user
+          hasAccount = _this$state.hasAccount; // Renders LoginView if no user
 
       if (!user) return _react.default.createElement(_loginView.default, {
         onLoggedIn: function onLoggedIn(user) {
           return _this3.onLoggedIn(user);
         },
         onRegister: this.handleToRegister
+      }); // on LoginView, when 'New User Sign Up' is clicked, goes to RegistrationView
+
+      if (!hasAccount) return _react.default.createElement(_registrationView.default, {
+        onLoggedIn: function onLoggedIn(user) {
+          return _this3.onLoggedIn(user);
+        },
+        onReturnLogin: this.handleReturnLogin
       });
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
-      return _react.default.createElement(_Row.default, {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Row.default, {
         className: "main-view justify-content-md-center"
       }, selectedMovie ? _react.default.createElement(_Row.default, {
         className: "justify-content-md-center"
@@ -48655,7 +48655,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             return _this3.onMovieClick(movie);
           }
         }));
-      })));
+      }))));
     }
   }]);
 
