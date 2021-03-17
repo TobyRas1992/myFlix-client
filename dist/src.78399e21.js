@@ -48091,9 +48091,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
-
-var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+var _reactBootstrap = require("react-bootstrap");
 
 require("./login-view.scss");
 
@@ -48135,31 +48133,37 @@ function LoginView(props) {
     props.onLoggedIn(username);
   };
 
-  return _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Form, {
+    className: "form-login"
+  }, _react.default.createElement("h1", {
+    className: "text-danger"
+  }, "Welcome to myFlix!"), _react.default.createElement("p", {
+    className: "mb-5"
+  }, "Please login to continue."), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formUsername"
-  }, _react.default.createElement(_Form.default.Label, null, "Username:"), _react.default.createElement(_Form.default.Control, {
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username:"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "text",
     placeholder: "Enter username",
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     }
-  })), _react.default.createElement(_Form.default.Group, {
+  })), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formPassword"
-  }, _react.default.createElement(_Form.default.Label, null, "Password:"), _react.default.createElement(_Form.default.Control, {
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password:"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "password",
     placeholder: "Enter password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  })), _react.default.createElement(_Button.default, {
+  })), _react.default.createElement(_reactBootstrap.Button, {
     variant: "primary",
     type: "submit",
     onClick: handleSubmit
   }, "Login"), " ", ' ', _react.default.createElement("small", null, "Not a member yet?"), _react.default.createElement("span", {
     onClick: onRegister
-  }, "Sign up for free"));
+  }, "Sign up for free")));
 }
 
 LoginView.propTypes = {
@@ -48168,7 +48172,7 @@ LoginView.propTypes = {
 };
 var _default = LoginView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/movie-card/movie-card.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/movie-card/movie-card.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
