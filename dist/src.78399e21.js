@@ -48499,9 +48499,7 @@ var _movieCard = require("../movie-card/movie-card");
 
 var _movieView = require("../movie-view/movie-view");
 
-var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
-
-var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+var _reactBootstrap = require("react-bootstrap");
 
 require("./main-view.scss");
 
@@ -48529,7 +48527,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-// extends the React.Component class to inherit lifecycle methods
 var MainView = /*#__PURE__*/function (_React$Component) {
   _inherits(MainView, _React$Component);
 
@@ -48540,7 +48537,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
     _classCallCheck(this, MainView);
 
-    _this = _super.call(this); // Initialize state with empty values 
+    _this = _super.call(this);
 
     _this.handleToRegister = function () {
       _this.setState({
@@ -48561,7 +48558,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       hasAccount: true
     };
     return _this;
-  } //GETS movies
+  } //GETS movies with hook
 
 
   _createClass(MainView, [{
@@ -48632,21 +48629,23 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Row.default, {
+      return _react.default.createElement(_react.default.Fragment, {
+        className: "my-3"
+      }, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactBootstrap.Row, {
         className: "main-view justify-content-md-center"
-      }, selectedMovie ? _react.default.createElement(_Row.default, {
+      }, selectedMovie ? _react.default.createElement(_reactBootstrap.Row, {
         className: "justify-content-md-center"
-      }, _react.default.createElement(_Col.default, {
+      }, _react.default.createElement(_reactBootstrap.Col, {
         md: 8
       }, _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie,
         onClick: function onClick() {
           return _this3.onReturnClick();
         }
-      }))) : _react.default.createElement(_Row.default, {
+      }))) : _react.default.createElement(_reactBootstrap.Row, {
         className: "justify-content-md-center"
       }, movies.map(function (movie) {
-        return _react.default.createElement(_Col.default, {
+        return _react.default.createElement(_reactBootstrap.Col, {
           md: 3
         }, _react.default.createElement(_movieCard.MovieCard, {
           key: movie._id,
@@ -48655,7 +48654,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             return _this3.onMovieClick(movie);
           }
         }));
-      }))));
+      })))));
     }
   }]);
 
@@ -48663,7 +48662,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.MainView = MainView;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","./main-view.scss":"components/main-view/main-view.scss"}],"index.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./main-view.scss":"components/main-view/main-view.scss"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);

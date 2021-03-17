@@ -6,16 +6,15 @@ import LoginView from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Row, Col, Container } from 'react-bootstrap';
+
 
 import './main-view.scss';
 
-// extends the React.Component class to inherit lifecycle methods
 export class MainView extends React.Component {
   constructor() {
     super();
-    // Initialize state with empty values 
+
     this.state = {
       movies: null,
       selectedMovie: null,
@@ -24,9 +23,10 @@ export class MainView extends React.Component {
     };
   }
 
-  //GETS movies
+  //GETS movies with hook
   componentDidMount() {
-    axios.get('https://my-movie-overview.herokuapp.com/movies')
+    axios
+      .get('https://my-movie-overview.herokuapp.com/movies')
       .then(response => {
         // Assign the result to the state + tells DOM state has changed
         this.setState({
@@ -93,27 +93,29 @@ export class MainView extends React.Component {
     if (!movies) return <div className="main-view" />;
 
     return (
-      <React.Fragment>
-        <Row className="main-view justify-content-md-center">
-          {selectedMovie
-            ? (
-              <Row className="justify-content-md-center">
-                <Col md={8}>
-                  <MovieView movie={selectedMovie} onClick={() => this.onReturnClick()} />
-                </Col>
-              </Row>
-            )
-            : (
-              <Row className="justify-content-md-center">
-                {movies.map(movie => (
-                  <Col md={3}>
-                    <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
+      <React.Fragment className="my-3">
+        <Container>
+          <Row className="main-view justify-content-md-center">
+            {selectedMovie
+              ? (
+                <Row className="justify-content-md-center">
+                  <Col md={8}>
+                    <MovieView movie={selectedMovie} onClick={() => this.onReturnClick()} />
                   </Col>
-                ))}
-              </Row>
-            )
-          }
-        </Row>
+                </Row>
+              )
+              : (
+                <Row className="justify-content-md-center">
+                  {movies.map(movie => (
+                    <Col md={3}>
+                      <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
+                    </Col>
+                  ))}
+                </Row>
+              )
+            }
+          </Row>
+        </Container>
       </React.Fragment>
     );
   }
