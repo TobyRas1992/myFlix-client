@@ -19,10 +19,51 @@ function RegistrationView(props) {
 
   const [loading, setLoading] = useState(false);
 
+  const formValidation = () => {
+    const usernameErr = {};
+    const passwordErr = {};
+    const emailErr = {};
+    let isValid = true;
+
+    if (username.trim().length < 6) {
+      usernameErr.usernameShort = "Username must be at least 6 characters";
+      isValid = false;
+    }
+
+    if (passwordErr.passwordMissing = "Password must be at least 5 characters");
+
+    if (!email.includes(".") && !email.includes("@")) {
+      emailErr.emailNotEmail = "A valid email address is required";
+    }
+
+    setUsernameErr(usernameErr);
+    setPasswordErr(passwordErr);
+    setEmailErr(emailErr);
+    return isValid;
+  }
+  const { handleReturnLogin } = props;
+
   const handleSubmitClick = (e) => {
     e.preventDefault();
-    console.log(username, email, password, birthday);
-    props.onLoggedIn(username);
+    setLoading(true);
+    const isValid = formValidation();
+    if (isValid) {
+      axios.post(
+        axios.post('', {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday
+        })
+      ).then(response => {
+        const data = response.data;
+        console.log(data);
+        window.open('/', '_self');
+        alert('New Account created - now log in')
+      }).catch(() => {
+        console.log('error registering the user')
+      })
+    }
   };
 
 
@@ -32,7 +73,13 @@ function RegistrationView(props) {
         <Navbar.Brand>myFlix Movie Database</Navbar.Brand>
       </Navbar>
 
-      <Container className="my-5">
+      <Container className="my-4 w-50 p-3">
+        <h2 className="text-center mb-4">
+          Welcome to myFlix Movie Database!
+        </h2>
+        <p className="text-center">
+          Create an account and start exploring.
+        </p>
         <Form>
 
           <Form.Group controlId="formUsername">
