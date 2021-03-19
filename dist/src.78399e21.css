@@ -5,6 +5,9 @@
   align-items: center;
   justify-content: center;
 }
+.main-body {
+  margin-top: 100px;
+}
 .my-flix {
   color: steelblue;
 }

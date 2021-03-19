@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Navbar } from 'react-bootstrap';
 
 
 import './login-view.scss';
@@ -19,6 +19,9 @@ function LoginView(props) {
 
   return (
     <React.Fragment>
+      <Navbar className="navbar" bg="dark" variant="dark">
+        <Navbar.Brand>myFlix Movie Database</Navbar.Brand>
+      </Navbar>
       <Form className="form-login">
         <h1 className="text-danger">Welcome to myFlix!</h1>
         <p className="mb-5">Please login to continue.</p>

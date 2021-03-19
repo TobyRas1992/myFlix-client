@@ -48011,7 +48011,13 @@ function RegistrationView(props) {
     props.onLoggedIn(username);
   };
 
-  return _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Form.Group, {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Navbar, {
+    className: "navbar",
+    bg: "dark",
+    variant: "dark"
+  }, _react.default.createElement(_reactBootstrap.Navbar.Brand, null, "myFlix Movie Database")), _react.default.createElement(_reactBootstrap.Container, {
+    className: "my-5"
+  }, _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formUsername"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Registration"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "text",
@@ -48062,7 +48068,7 @@ function RegistrationView(props) {
     variant: "info",
     type: "submit",
     onClick: handleSubmitClick
-  }, "Sign Up"));
+  }, "Sign Up"))));
 }
 
 RegistrationView.propTypes = {
@@ -48133,7 +48139,11 @@ function LoginView(props) {
     props.onLoggedIn(username);
   };
 
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Form, {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Navbar, {
+    className: "navbar",
+    bg: "dark",
+    variant: "dark"
+  }, _react.default.createElement(_reactBootstrap.Navbar.Brand, null, "myFlix Movie Database")), _react.default.createElement(_reactBootstrap.Form, {
     className: "form-login"
   }, _react.default.createElement("h1", {
     className: "text-danger"
@@ -48423,29 +48433,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick() {
           return _onClick(movie);
         }
-      }, "Return to Movie List")) // <div className="movie-view">
-      //   <img className="movie-poster" src={movie.ImagePath} />
-      //   <div className="movie-title">
-      //     <span className="label">Title: </span>
-      //     <span className="value">{movie.Title}</span>
-      //   </div>
-      //   <div className="movie-description">
-      //     <span className="label">Description: </span>
-      //     <span className="value">{movie.Description}</span>
-      //   </div>
-      //   <div className="movie-genre">
-      //     <span className="label">Genre: </span>
-      //     <span className="value">{movie.Genre.Name}</span>
-      //   </div>
-      //   <div className="movie-director">
-      //     <span className="label">Director: </span>
-      //     <span className="value">{movie.Director.Name}</span>
-      //   </div>
-      //   <div className="exit-button">
-      //     <ReturnButton onClick={this.props.onReturnClick} />
-      //   </div>
-      // </div>
-      ;
+      }, "Return to Movie List"));
     }
   }]);
 
@@ -48583,7 +48571,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: // Updates user in state on successful login
     function onLoggedIn(user) {
       this.setState({
-        user: user
+        user: user,
+        hasAccount: true
       });
     } //Handler to navigate from MainView to MovieView
 
@@ -48611,27 +48600,46 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          hasAccount = _this$state.hasAccount; // Renders LoginView if no user
-
-      if (!user) return _react.default.createElement(_loginView.default, {
-        onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
-        },
-        onRegister: this.handleToRegister
-      }); // on LoginView, when 'New User Sign Up' is clicked, goes to RegistrationView
+          hasAccount = _this$state.hasAccount; // on LoginView, when 'New User Sign Up' is clicked, goes to RegistrationView
 
       if (!hasAccount) return _react.default.createElement(_registrationView.default, {
         onLoggedIn: function onLoggedIn(user) {
           return _this3.onLoggedIn(user);
         },
         onReturnLogin: this.handleReturnLogin
+      }); // Renders LoginView if no user
+
+      if (!user) return _react.default.createElement(_loginView.default, {
+        onLoggedIn: function onLoggedIn(user) {
+          return _this3.onLoggedIn(user);
+        },
+        onRegister: this.handleToRegister
       });
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
-      return _react.default.createElement(_react.default.Fragment, {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Navbar, {
+        className: "navbar",
+        bg: "dark",
+        variant: "dark",
+        expand: "md"
+      }, _react.default.createElement(_reactBootstrap.Navbar.Brand, {
+        href: "#home"
+      }, "myFlix Movie Database"), _react.default.createElement(_reactBootstrap.Navbar.Toggle, {
+        "aria-controls": "basic-navbar-nav"
+      }), _react.default.createElement(_reactBootstrap.Navbar.Collapse, {
+        id: "basic-navbar-nav"
+      }, _react.default.createElement(_reactBootstrap.Nav, {
+        className: "mr-auto"
+      }, _react.default.createElement(_reactBootstrap.Nav.Link, {
+        href: "#home"
+      }, "Home"), _react.default.createElement(_reactBootstrap.Nav.Link, {
+        href: "#link"
+      }, "Profile"), _react.default.createElement(_reactBootstrap.Nav.Link, {
+        href: "http://localhost:1234"
+      }, "LogOut")))), _react.default.createElement(_reactBootstrap.Container, {
         className: "my-3"
-      }, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_reactBootstrap.Row, {
+      }, _react.default.createElement(_reactBootstrap.Row, {
         className: "main-view justify-content-md-center"
       }, selectedMovie ? _react.default.createElement(_reactBootstrap.Row, {
         className: "justify-content-md-center"
@@ -48758,7 +48766,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51694" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58400" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
