@@ -90,6 +90,13 @@ function RegistrationView(props) {
               placeholder="Username"
               onChange={e => setUsername(e.target.value)}
             />
+            {Object.keys(usernameErr).map((key) => {
+              return (
+                <div key={key} style={{ color: "red" }}>
+                  {usernameErr[key]}
+                </div>
+              );
+            })}
           </Form.Group>
 
           <Form.Group controlId="formEmail">
@@ -128,8 +135,16 @@ function RegistrationView(props) {
               onChange={e => setConfirmPassword(e.target.value)}
             />
           </Form.Group>
-          <Button variant="info" type="submit" onClick={handleSubmitClick}>Sign Up</Button>
+          {!loading && <Button variant="info" type="submit" onClick={handleSubmitClick}>Sign Up</Button>}
+          {loading && <Button variant="info" type="submit" disabled>
+            <Spinner animation="border" variant="danger" /></Button>}
         </Form>
+        <small>
+          Already have an account?
+          <span onClick={handleReturnLogin} className="register text-danger ml-2ak">
+            Return to Log In
+          </span>
+        </small>
       </Container>
     </React.Fragment>
   );
