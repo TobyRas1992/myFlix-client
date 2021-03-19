@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button, Navbar, Container } from 'react-bootstrap';
+import { Form, Button, Navbar, Container, Spinner } from 'react-bootstrap';
+
+import axios from 'axios';
 
 import './registration-view.scss';
 
@@ -10,6 +12,12 @@ function RegistrationView(props) {
   const [password, setPassword] = useState('');
   const [birthday, setBirthday] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [usernameErr, setUsernameErr] = useState({});
+  const [emailErr, setEmailErr] = useState({});
+  const [passwordErr, setPasswordErr] = ({});
+
+  const [loading, setLoading] = useState(false);
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
