@@ -25,17 +25,13 @@ export class MainView extends React.Component {
 
   //GETS movies with hook
   componentDidMount() {
-    axios
-      .get('https://my-movie-overview.herokuapp.com/movies')
-      .then(response => {
-        // Assign the result to the state + tells DOM state has changed
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
       });
+      this.getMovies(accessToken);
+    }
   }
 
   // FUNCTIONS
@@ -54,10 +50,21 @@ export class MainView extends React.Component {
   }
 
   // Updates user in state on successful login
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user, hasAccount: true
+      user: authData.user.Username
     });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
+  }
+
+  //Logs user out
+  handleLogOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 
   //Handler to navigate from MainView to MovieView
@@ -73,7 +80,18 @@ export class MainView extends React.Component {
     });
   }
 
-
+  // Gets movies from API
+  getMovies(token) {
+    axios.get('https://my-movie-overview.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => {
+      this.setState({
+        movies: response.data
+      });
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
 
   render() {
     const { movies, selectedMovie, user, hasAccount } = this.state;
@@ -102,7 +120,7 @@ export class MainView extends React.Component {
             <Nav className="mr-auto">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#link">Profile</Nav.Link>
-              <Nav.Link href="http://localhost:1234">LogOut</Nav.Link>
+              <Nav.Link onClick={this.handleLogOut}>LogOut</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
