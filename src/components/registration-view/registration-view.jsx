@@ -106,6 +106,13 @@ function RegistrationView(props) {
               placeholder="Email"
               onChange={e => setEmail(e.target.value)}
             />
+            {Object.keys(emailErr).map((key) => {
+              return (
+                <div key={key} style={{ color: "red" }}>
+                  {emailErr[key]}
+                </div>
+              );
+            })}
             <Form.Text className="text-muted">We will never share your email with anyone else</Form.Text>
           </Form.Group>
 
@@ -113,7 +120,7 @@ function RegistrationView(props) {
             <Form.Control
               type="text"
               value={birthday}
-              placeholder="Birthday"
+              placeholder="Date of Birth (YYYY-MM-DD)"
               onChange={e => setBirthday(e.target.value)}
             />
           </Form.Group>
@@ -125,6 +132,13 @@ function RegistrationView(props) {
               placeholder="Password"
               onChange={e => setPassword(e.target.value)}
             />
+            {Object.keys(passwordErr).map((key) => {
+              return (
+                <div key={key} style={{ color: "red" }}>
+                  {passwordErr[key]}
+                </div>
+              );
+            })}
           </Form.Group>
 
           <Form.Group controlId="formConfirmPassword">
