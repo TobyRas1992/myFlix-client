@@ -11,7 +11,6 @@ function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [birthday, setBirthday] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [usernameErr, setUsernameErr] = useState({});
   const [emailErr, setEmailErr] = useState({});
@@ -80,8 +79,8 @@ function RegistrationView(props) {
         <p className="text-center">
           Create an account and start exploring.
         </p>
-        <Form>
 
+        <Form>
           <Form.Group controlId="formUsername">
             <Form.Label>Registration</Form.Label>
             <Form.Control
@@ -141,14 +140,6 @@ function RegistrationView(props) {
             })}
           </Form.Group>
 
-          <Form.Group controlId="formConfirmPassword">
-            <Form.Control
-              type="password"
-              value={confirmPassword}
-              placeholder="Confirm Password"
-              onChange={e => setConfirmPassword(e.target.value)}
-            />
-          </Form.Group>
           {!loading && <Button variant="info" type="submit" onClick={handleSubmitClick}>Sign Up</Button>}
           {loading && <Button variant="info" type="submit" disabled>
             <Spinner animation="border" variant="danger" /></Button>}
