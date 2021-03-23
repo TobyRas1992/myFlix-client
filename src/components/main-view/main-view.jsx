@@ -18,7 +18,7 @@ export class MainView extends React.Component {
     super();
 
     this.state = {
-      movies: null,
+      movies: [],
       selectedMovie: null,
       user: null,
       hasAccount: true
@@ -105,8 +105,7 @@ export class MainView extends React.Component {
       return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} onReturnLogin={this.handleReturnLogin} />
 
     // Renders LoginView if no user
-    if (!user)
-      return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={this.handleToRegister} />;
+
 
 
 
@@ -132,8 +131,15 @@ export class MainView extends React.Component {
           <Container className="my-3">
             <Row className="main-view justify-content-md-center">
 
-              <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m} />)} />
+              <Route exact path="/" render={() => {
+                if (!user)
+                  return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={this.handleToRegister} />;
+                return movies.map(m => <MovieCard key={m._id} movie={m} />)
+              }
+              } />
 
+              <Route path="/register" render={() => <RegistrationView />}
+              
               <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
 
               <Route path="/directors/:name" render={({ match }) => {

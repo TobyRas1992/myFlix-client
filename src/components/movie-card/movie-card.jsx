@@ -9,7 +9,7 @@ import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onClick } = this.props;
+    const { movie } = this.props;
 
     return (
       <Card className="movie-card">
@@ -17,7 +17,7 @@ export class MovieCard extends React.Component {
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>Released: {movie.Released}</Card.Text>
-          <Link to={ }>
+          <Link to={`/movies/${movie._id}`}>
             <Button variant="link">Show more info</Button>
           </Link>
         </Card.Body>

@@ -3,6 +3,8 @@ import { ReturnButton } from '../return-button/return-button';
 import { Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+import { Link } from "react-router-dom";
+
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
@@ -37,7 +39,18 @@ export class MovieView extends React.Component {
             Released: {movie.Released}
           </ListGroupItem>
         </ListGroup>
-        <Button className="return-button" variant="info" onClick={() => onClick(movie)}>Return to Movie List</Button>
+
+        <Link to={`/directors/${movie.Director.Name}`}>
+          <Button className="return-button" variant="link">Director</Button>
+        </Link>
+
+        <Link to={`/genres/${movie.Genre.Name}`}>
+          <Button variant="link">Genre</Button>
+        </Link>
+
+        <Link to={`/`}>
+          <Button className="return-button" variant="link">Exit Movie View</Button>
+        </Link>
       </Card>
     );
   }
