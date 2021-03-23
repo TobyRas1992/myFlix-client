@@ -16,11 +16,27 @@ export function DirectorView(props) {
       <Container className="my-3 w-50 p-3">
         <Card className="director-view">
           <Card.Body>
-            <Card.Title>{director.Name}</Card.Title>
+            <Card.Title className="director-title">{director.Name}</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">{director.Birth}-{director.Death}</Card.Subtitle>
+            <Card.Text>{director.Bio}</Card.Text>
+            <div className="center-btn">
+              <Button className="return-button" variant="info" onClick={() => history.goBack()}>Return to movie</Button>
+            </div>
           </Card.Body>
         </Card>
       </Container>
-      <Container></Container>
+      <Container>
+        <h5 className='text-center mb-4 white-words'> Movies by {director.Name}</h5>
+        <Row className="main-view justify-content-md-center">
+          {movies.map(m => {
+            if (m.Director.Name === director.Name) {
+              return (
+                <MovieCard key={m._id} movie={m} />
+              );
+            }
+          })}
+        </Row>
+      </Container>
 
     </React.Fragment>
   );
