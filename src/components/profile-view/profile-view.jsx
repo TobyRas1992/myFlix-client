@@ -38,6 +38,25 @@ export class ProfileView extends React.Component {
     });
   }
 
+  // Persisted authentication - keeps user details
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getUser(accessToken, localStorage.getItem('user'));
+    }
+  }
+
+  formatDate(date) {
+    if (date) date = date.substring(0, 10);
+    return date;
+  }
+
+  removeFavorite(movie) {
+
+  }
 
   render() {
     const { movies } = this.props;
