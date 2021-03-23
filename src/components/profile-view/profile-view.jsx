@@ -18,6 +18,27 @@ export class ProfileView extends React.Component {
     };
   }
 
+
+  // GET user from API
+  getUser = (token, user) => {
+    axios.get(`https://my-movie-overview.herokuapp.com/users/${user}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(
+      response => {
+        this.setState({
+          username: response.data.Username,
+          email: response.data.Email,
+          birthday: this.formatDate(response.data.Birthday),
+          password: response.data.Password,
+          favoriteMovies: response.data.favoriteMovies
+        });
+      }
+    ).catch(function (error) {
+      console.log(error);
+    });
+  }
+
+
   render() {
     const { movies } = this.props;
     const favoriteMovieList = movies.filter(movie => {
@@ -58,7 +79,20 @@ export class ProfileView extends React.Component {
           (movie) => {
             return (
               <div key={movie._id}>
-                <Card style={{ width: '10rem' }}>
+                <Card style={{ width: '10rem' }} className='favorite-card'>
+                  <Link to={`/movies/${move._id}`}>
+                    <Card.Img
+                      className="movie-card-link"
+                      variant="top"
+                      src={movie.ImagePath} />
+                  </Link>
+                  <Button
+                    className="remove-favorite"
+                    variant="danger"
+                    size="sm"
+                    onClick={() => this.removeFavorite(movie)}>
+                    Remove
+                  </Button>
 
                 </Card>
               </div>
