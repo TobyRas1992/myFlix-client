@@ -53,8 +53,18 @@ export class ProfileView extends React.Component {
         <h2 className="text-center mb-4 white-words">Favorite Movies</h2>
       </Container>
 
-      <Container ="d-flex row my-3 favorites">
+      <Container className="d-flex row my-3 favorites">
+        {favoriteMovieList.map(
+          (movie) => {
+            return (
+              <div key={movie._id}>
+                <Card style={{ width: '10rem' }}>
 
+                </Card>
+              </div>
+            );
+          }
+        )}
       </Container>
     </React.Fragment >);
 
