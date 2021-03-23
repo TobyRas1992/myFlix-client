@@ -55,7 +55,18 @@ export class ProfileView extends React.Component {
   }
 
   removeFavorite(movie) {
-
+    let token = localStorage.getItem("token");
+    let user = localStorage.getItem("user");
+    axios.delete(`https://my-movie-overview.herokuapp.com/users/${user}/${movie._id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(
+      (response) => {
+        console.log(response);
+        this.componentDidMount();
+      }
+    ).catch(function (error) {
+      consolelog(error);
+    });
   }
 
   render() {
