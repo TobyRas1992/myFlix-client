@@ -88,12 +88,39 @@ export function UpdateView() {
 
   return (
     <React.Fragment>
-      <Container>
+      <Container className="my-3 w-50 p-3">
+        <h2 className="text-center mb-4 white-words">Edit Details</h2>
         <Form>
-          <Form.Group controlId="formUsername"></Form.Group>
-          <Form.Group controlId="formEmail"></Form.Group>
-          <Form.Group controlId="formBirthday"></Form.Group>
-          <Form.Group controlId="formPassword"></Form.Group>
+          <Form.Group controlId="formUsername">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              value={username}
+              onChange={e => setUsername(e.target.value)} />
+            {Object.keys(usernameErr).map((key) => {
+              return (
+                <div key={key} style={{ color: "red" }}>{usernameErr[key]}</div>
+              );
+            })}
+          </Form.Group>
+          <Form.Group controlId="formEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)} />
+            {Object.keys(emailErr).map((key) => {
+              return ();
+            })}
+          </Form.Group>
+          <Form.Group controlId="formBirthday">
+            <Form.Label>Birthday</Form.Label>
+            <Form.Control />
+          </Form.Group>
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control />
+          </Form.Group>
           <Button className="update-button" variant="info" onClick={updateDetails}>Update</Button>
           <div className="center-btn">
             <small className="register text-danger ml-2" onClick={handleDelete}>Delete Account</small>
