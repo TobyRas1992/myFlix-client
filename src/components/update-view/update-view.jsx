@@ -69,8 +69,21 @@ export function UpdateView() {
 
   // Deletes user account
   const handleDelete = () => {
-    if (!confirm("Are you sure you want to delete your account?")) return;
-
+    if (!confirm("Are you sure you want to delete your account?")) return; //explain logic for this?
+    let token = localStorage.getItem("token");
+    let user = localStorage.getItem("user");
+    if (isValid) {
+      axios.delete(``, {
+        headers: { Authorization: `Bearer ${token}` }
+      }).then(() => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.open("/", "_self");
+        alert("Your account has been deleted.");
+      }).catch(() => {
+        console.log(response);
+      })
+    }
   }
 
   return (
