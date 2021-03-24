@@ -65,7 +65,7 @@ export class ProfileView extends React.Component {
         this.componentDidMount();
       }
     ).catch(function (error) {
-      consolelog(error);
+      console.log(error);
     });
   }
 
@@ -85,13 +85,13 @@ export class ProfileView extends React.Component {
             <Card.Text>Email: {this.state.email}</Card.Text>
             <Card.Text>Birthday: {this.state.birthday}</Card.Text>
 
-            <Link to {`/update`}>
+            <Link to={`/update`}>
               <div className="center-btn">
                 <small className="register text-danger ml-2">Update details</small>
               </div>
             </Link>
 
-            <Link to {`/`}>
+            <Link to={`/`}>
               <div className="center-btn">
                 <Button className="return-button" variant="info">Return to Movie List</Button>
               </div>
