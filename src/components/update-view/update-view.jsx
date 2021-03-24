@@ -103,6 +103,7 @@ export function UpdateView() {
               );
             })}
           </Form.Group>
+
           <Form.Group controlId="formEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -110,13 +111,20 @@ export function UpdateView() {
               value={email}
               onChange={e => setEmail(e.target.value)} />
             {Object.keys(emailErr).map((key) => {
-              return ();
+              return (
+                <div key={key} style={{ color: "red" }}>{emailErr[key]}</div>
+              );
             })}
           </Form.Group>
+
           <Form.Group controlId="formBirthday">
             <Form.Label>Birthday</Form.Label>
-            <Form.Control />
+            <Form.Control
+              type="text"
+              value={birthday}
+              onChange={e => setBirthday(e.target.value)} />
           </Form.Group>
+
           <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control />
