@@ -51273,7 +51273,7 @@ function LoginView(props) {
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault(); //prevents default refresh/change page
 
-    _axios.default.post('https://my-movie-overview.herokuapp.com/users/', {
+    _axios.default.post('https://my-movie-overview.herokuapp.com/login/', {
       Username: username,
       Password: password
     }).then(function (response) {
