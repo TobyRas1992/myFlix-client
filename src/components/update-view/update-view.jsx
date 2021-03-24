@@ -49,7 +49,7 @@ export function UpdateView() {
     let user = localStorage.getItem('user');
     const isValid = formValidation();
     if (isValid) {
-      axios.put(``, {
+      axios.put(`https://my-movie-overview.herokuapp.com/users/${user}`, {
         Username: username,
         Email: email,
         Birthday: birthday,
@@ -73,7 +73,7 @@ export function UpdateView() {
     let token = localStorage.getItem("token");
     let user = localStorage.getItem("user");
     if (isValid) {
-      axios.delete(``, {
+      axios.delete(`https://my-movie-overview.herokuapp.com/users/${user}`, {
         headers: { Authorization: `Bearer ${token}` }
       }).then(() => {
         localStorage.removeItem("token");
