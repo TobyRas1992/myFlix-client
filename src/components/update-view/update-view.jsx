@@ -89,7 +89,16 @@ export function UpdateView() {
   return (
     <React.Fragment>
       <Container>
-
+        <Form>
+          <Form.Group controlId="formUsername"></Form.Group>
+          <Form.Group controlId="formEmail"></Form.Group>
+          <Form.Group controlId="formBirthday"></Form.Group>
+          <Form.Group controlId="formPassword"></Form.Group>
+          <Button className="update-button" variant="info" onClick={updateDetails}>Update</Button>
+          <div className="center-btn">
+            <small className="register text-danger ml-2" onClick={handleDelete}>Delete Account</small>
+          </div>
+        </Form>
       </Container>
     </React.Fragment>
   );
