@@ -15,7 +15,7 @@ function RegistrationView(props) {
 
   const [usernameErr, setUsernameErr] = useState({});
   const [emailErr, setEmailErr] = useState({});
-  const [passwordErr, setPasswordErr] = ({});
+  const [passwordErr, setPasswordErr] = useState({});
 
   const [loading, setLoading] = useState(false);
 
@@ -49,7 +49,7 @@ function RegistrationView(props) {
     const isValid = formValidation();
     if (isValid) {
       axios.post(
-        axios.post('', {
+        axios.post('https://my-movie-overview.herokuapp.com/users', {
           Username: username,
           Password: password,
           Email: email,
@@ -76,10 +76,10 @@ function RegistrationView(props) {
       <Container className="my-4 w-50 p-3">
         <h2 className="text-center mb-4">
           Welcome to myFlix Movie Database!
-        </h2>
+      </h2>
         <p className="text-center">
           Create an account and start exploring.
-        </p>
+      </p>
 
         <Form>
           <Form.Group controlId="formUsername">
@@ -147,14 +147,15 @@ function RegistrationView(props) {
         </Form>
         <small>
           Already have an account?
-          <span onClick={handleReturnLogin} className="register text-danger ml-2ak">
+        <span onClick={handleReturnLogin} className="register text-danger ml-2ak">
             Return to Log In
-          </span>
+        </span>
         </small>
       </Container>
     </React.Fragment>
   );
 }
+
 
 RegistrationView.propTypes = {
   username: PropTypes.string,

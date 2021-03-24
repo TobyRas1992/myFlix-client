@@ -51064,15 +51064,15 @@ function RegistrationView(props) {
       emailErr = _useState12[0],
       setEmailErr = _useState12[1];
 
-  var _ref = {},
-      _ref2 = _slicedToArray(_ref, 2),
-      passwordErr = _ref2[0],
-      setPasswordErr = _ref2[1];
-
-  var _useState13 = (0, _react.useState)(false),
+  var _useState13 = (0, _react.useState)({}),
       _useState14 = _slicedToArray(_useState13, 2),
-      loading = _useState14[0],
-      setLoading = _useState14[1];
+      passwordErr = _useState14[0],
+      setPasswordErr = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      loading = _useState16[0],
+      setLoading = _useState16[1];
 
   var formValidation = function formValidation() {
     var usernameErr = {};
@@ -51105,7 +51105,7 @@ function RegistrationView(props) {
     var isValid = formValidation();
 
     if (isValid) {
-      _axios.default.post(_axios.default.post('', {
+      _axios.default.post(_axios.default.post('https://my-movie-overview.herokuapp.com/users', {
         Username: username,
         Password: password,
         Email: email,
