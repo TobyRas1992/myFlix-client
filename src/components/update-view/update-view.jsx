@@ -97,7 +97,7 @@ export function UpdateView() {
               type="text"
               value={username}
               onChange={e => setUsername(e.target.value)} />
-            {Object.keys(usernameErr).map((key) => {
+            {Object.keys(usernameErr).map((key) => { // How does this error check work?
               return (
                 <div key={key} style={{ color: "red" }}>{usernameErr[key]}</div>
               );
@@ -122,17 +122,31 @@ export function UpdateView() {
             <Form.Control
               type="text"
               value={birthday}
+              placeholder="YYY-MM-DD"
               onChange={e => setBirthday(e.target.value)} />
           </Form.Group>
 
           <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control />
+            <Form.Control
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)} />
+            {Object.keys(passwordErr).map((key) => {
+              return (
+                <div key={key} style={{ color: "red" }}>
+                  {passwordErr[key]}
+                </div>
+              );
+            })}
           </Form.Group>
+
           <Button className="update-button" variant="info" onClick={updateDetails}>Update</Button>
+
           <div className="center-btn">
             <small className="register text-danger ml-2" onClick={handleDelete}>Delete Account</small>
           </div>
+
         </Form>
       </Container>
     </React.Fragment>
