@@ -29,9 +29,34 @@ export function UpdateView() {
       passwordErr.passwordMissing = "Password must be at least 5 characters";
       isValid = false;
     }
+
+    if (!email.includes(".") && !email.includes("@")) {
+      emailErr.emailNotEmail = "A valid email address is required";
+      isValid = false;
+    }
+
+    setUsernameErr(usernameErr);
+    setPasswordErr(passwordErr);
+    setEmailErr(emailErr);
+    return isValid;
   }
 
-  const updateDetails = (e) => { }
+  const updateDetails = (e) => {
+    e.preventDefault();
+    let token = localStorage.getItem('token');
+    let user = localStorage.getItem('user');
+    const isValid = formValidation();
+    if (isValid) {
+      axios.put(``, {
+        Username: username,
+        Email: email,
+        Birthday: birthday,
+        Password: password
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+    }
+  }
 
   const handleDelete = () => { }
 
