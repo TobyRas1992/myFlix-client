@@ -13,7 +13,7 @@ function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault(); //prevents default refresh/change page
-    axios.post('https://my-movie-overview.herokuapp.com/login/', {
+    axios.post('https://my-movie-overview.herokuapp.com/users/', {
       Username: username,
       Password: password
     }).then(response => {
