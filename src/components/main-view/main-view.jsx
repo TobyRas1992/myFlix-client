@@ -115,17 +115,19 @@ export class MainView extends React.Component {
     return (
       <Router>
         <React.Fragment>
-          <Navbar className="navbar" fixed="top" collapseOnSelect bg="dark" variant="dark" expand="lg">
-            <Navbar.Brand href="#home">myFlix Movie Database</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/profile">Profile</Nav.Link>
-                <Nav.Link onClick={() => this.handleLogOut()}>LogOut</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+          <header>
+            <Navbar className="navbar" collapseOnSelect bg="dark" variant="dark" expand="lg">
+              <Navbar.Brand href="#home">myFlix Movie Database</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                  <Nav.Link href="/">Home</Nav.Link>
+                  <Nav.Link href="/profile">Profile</Nav.Link>
+                  <Nav.Link onClick={() => this.handleLogOut()}>LogOut</Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+          </header>
           <Container className="my-3">
             <Row className="main-view justify-content-md-center">
 

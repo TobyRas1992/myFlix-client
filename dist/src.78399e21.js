@@ -51285,11 +51285,7 @@ function LoginView(props) {
     });
   };
 
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Navbar, {
-    className: "navbar",
-    bg: "dark",
-    variant: "dark"
-  }, _react.default.createElement(_reactBootstrap.Navbar.Brand, null, "myFlix Movie Database")), _react.default.createElement(_reactBootstrap.Form, {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Form, {
     className: "form-login"
   }, _react.default.createElement("h1", {
     className: "text-danger"
@@ -52361,9 +52357,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
-      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Navbar, {
+      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("header", null, _react.default.createElement(_reactBootstrap.Navbar, {
         className: "navbar",
-        fixed: "top",
         collapseOnSelect: true,
         bg: "dark",
         variant: "dark",
@@ -52384,7 +52379,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick() {
           return _this3.handleLogOut();
         }
-      }, "LogOut")))), _react.default.createElement(_reactBootstrap.Container, {
+      }, "LogOut"))))), _react.default.createElement(_reactBootstrap.Container, {
         className: "my-3"
       }, _react.default.createElement(_reactBootstrap.Row, {
         className: "main-view justify-content-md-center"
