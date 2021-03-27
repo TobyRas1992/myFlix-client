@@ -107,7 +107,10 @@ export class MainView extends React.Component {
 
     // on LoginView, when 'New User Sign Up' is clicked, goes to RegistrationView
     if (!hasAccount)
-      return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} onReturnLogin={this.handleReturnLogin} />
+      return <RegistrationView
+        onLoggedIn={user => this.onLoggedIn(user)}
+        onReturnLogin={this.handleReturnLogin}
+      />
 
 
     if (!movies) return <div className="main-view" />;
@@ -118,8 +121,8 @@ export class MainView extends React.Component {
           <header>
             <Navbar className="navbar" collapseOnSelect bg="dark" variant="dark" expand="lg">
               <Navbar.Brand href="#home">myFlix Movie Database</Navbar.Brand>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
                   <Nav.Link href="/">Home</Nav.Link>
                   <Nav.Link href="/profile">Profile</Nav.Link>

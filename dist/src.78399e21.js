@@ -52366,9 +52366,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement(_reactBootstrap.Navbar.Brand, {
         href: "#home"
       }, "myFlix Movie Database"), _react.default.createElement(_reactBootstrap.Navbar.Toggle, {
-        "aria-controls": "basic-navbar-nav"
+        "aria-controls": "responsive-navbar-nav"
       }), _react.default.createElement(_reactBootstrap.Navbar.Collapse, {
-        id: "basic-navbar-nav"
+        id: "responsive-navbar-nav"
       }, _react.default.createElement(_reactBootstrap.Nav, {
         className: "mr-auto"
       }, _react.default.createElement(_reactBootstrap.Nav.Link, {
