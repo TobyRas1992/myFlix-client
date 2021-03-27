@@ -49,20 +49,20 @@ function RegistrationView(props) {
     const isValid = formValidation();
     if (isValid) {
       axios.post(
-        axios.post('https://my-movie-overview.herokuapp.com/users', {
-          Username: username,
-          Password: password,
-          Email: email,
-          Birthday: birthday
-        })
-      ).then(response => {
-        const data = response.data;
-        console.log(data);
-        window.open('/', '_self');
-        alert('New Account created - now log in')
-      }).catch(() => {
-        console.log('error registering the user')
+        'https://my-movie-overview.herokuapp.com/users', {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
       })
+        .then(response => {
+          const data = response.data;
+          console.log(data);
+          window.open('/', '_self');
+          alert('New Account created - now log in')
+        }).catch(() => {
+          console.log('error registering the user')
+        })
     }
   };
 

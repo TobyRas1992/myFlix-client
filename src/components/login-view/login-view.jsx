@@ -6,6 +6,7 @@ import axios from 'axios';
 import './login-view.scss';
 
 function LoginView(props) {
+  // Hook useState() allows functional component to manipulate state
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 

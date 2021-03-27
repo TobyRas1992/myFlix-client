@@ -51105,12 +51105,12 @@ function RegistrationView(props) {
     var isValid = formValidation();
 
     if (isValid) {
-      _axios.default.post(_axios.default.post('https://my-movie-overview.herokuapp.com/users', {
+      _axios.default.post('https://my-movie-overview.herokuapp.com/users', {
         Username: username,
         Password: password,
         Email: email,
         Birthday: birthday
-      })).then(function (response) {
+      }).then(function (response) {
         var data = response.data;
         console.log(data);
         window.open('/', '_self');
@@ -51258,6 +51258,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function LoginView(props) {
+  // Hook useState() allows functional component to manipulate state
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       username = _useState2[0],
@@ -52560,7 +52561,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65531" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62168" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
