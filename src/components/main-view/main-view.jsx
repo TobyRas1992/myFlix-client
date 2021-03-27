@@ -12,7 +12,7 @@ import { UpdateView } from "../update-view/update-view";
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
-import { Row, Col, Container, Navbar, Nav } from 'react-bootstrap';
+import { Row, Col, Container, Navbar, Nav, Jumbotron } from 'react-bootstrap';
 
 
 import './main-view.scss';
@@ -115,7 +115,7 @@ export class MainView extends React.Component {
     return (
       <Router>
         <React.Fragment>
-          <Navbar className="navbar" bg="dark" variant="dark" expand="md">
+          <Navbar className="navbar" fixed="top" collapseOnSelect bg="dark" variant="dark" expand="lg">
             <Navbar.Brand href="#home">myFlix Movie Database</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -158,6 +158,13 @@ export class MainView extends React.Component {
 
             </Row>
           </Container>
+          <Jumbotron fluid className="text-center">
+            <h1>myFlix Movie DataBase</h1>
+            <p>The collection of my favorite movies</p>
+          </Jumbotron>
+          <footer className="fixed-bottom bg-dark text-white text-center">
+            <p>Copyright; 2021 myFlix. All rights reserved</p>
+          </footer>
         </React.Fragment>
       </Router>
     );

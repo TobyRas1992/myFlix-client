@@ -52363,9 +52363,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Navbar, {
         className: "navbar",
+        fixed: "top",
+        collapseOnSelect: true,
         bg: "dark",
         variant: "dark",
-        expand: "md"
+        expand: "lg"
       }, _react.default.createElement(_reactBootstrap.Navbar.Brand, {
         href: "#home"
       }, "myFlix Movie Database"), _react.default.createElement(_reactBootstrap.Navbar.Toggle, {
@@ -52457,7 +52459,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         render: function render() {
           return _react.default.createElement(_updateView.UpdateView, null);
         }
-      })))));
+      }))), _react.default.createElement(_reactBootstrap.Jumbotron, {
+        fluid: true,
+        className: "text-center"
+      }, _react.default.createElement("h1", null, "myFlix Movie DataBase"), _react.default.createElement("p", null, "The collection of my favorite movies")), _react.default.createElement("footer", {
+        className: "fixed-bottom bg-dark text-white text-center"
+      }, _react.default.createElement("p", null, "Copyright; 2021 myFlix. All rights reserved"))));
     }
   }]);
 
