@@ -30,7 +30,9 @@ function RegistrationView(props) {
       isValid = false;
     }
 
-    if (passwordErr.passwordMissing = "Password must be at least 5 characters");
+    if (!password || password.length < 5) {
+      passwordErr.passwordMissing = "Password must be at least 5 characters"
+    }
 
     if (!email.includes(".") && !email.includes("@")) {
       emailErr.emailNotEmail = "A valid email address is required";
