@@ -51085,7 +51085,9 @@ function RegistrationView(props) {
       isValid = false;
     }
 
-    if (passwordErr.passwordMissing = "Password must be at least 5 characters") ;
+    if (!password || password.length < 5) {
+      passwordErr.passwordMissing = "Password must be at least 5 characters";
+    }
 
     if (!email.includes(".") && !email.includes("@")) {
       emailErr.emailNotEmail = "A valid email address is required";
@@ -52563,7 +52565,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62168" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54360" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
