@@ -42,12 +42,12 @@ export function DirectorView(props) {
   );
 }
 
-DirectorView.PropTypes = {
+DirectorView.propTypes = {
   Movie: PropTypes.shape({
     Director: {
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string.isRequired,
+      Name: PropTypes.string,
+      Bio: PropTypes.string,
+      Birth: PropTypes.string,
       Death: PropTypes.string
     }
   }

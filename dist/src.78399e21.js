@@ -51411,8 +51411,7 @@ MovieCard.propTypes = {
     Description: _propTypes.default.string.isRequired,
     ImagePath: _propTypes.default.string.isRequired,
     Released: _propTypes.default.string
-  }).isRequired,
-  onClick: _propTypes.default.func.isRequired
+  }).isRequired
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./movie-card.scss":"components/movie-card/movie-card.scss"}],"components/genre-view/genre-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -51546,12 +51545,12 @@ function DirectorView(props) {
   }))));
 }
 
-DirectorView.PropTypes = {
+DirectorView.propTypes = {
   Movie: _propTypes.default.shape({
     Director: {
-      Name: _propTypes.default.string.isRequired,
-      Bio: _propTypes.default.string.isRequired,
-      Birth: _propTypes.default.string.isRequired,
+      Name: _propTypes.default.string,
+      Bio: _propTypes.default.string,
+      Birth: _propTypes.default.string,
       Death: _propTypes.default.string
     }
   })
@@ -52425,19 +52424,21 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             className: "main-view"
           });
           return _react.default.createElement(_directorView.DirectorView, {
+            movies: _this3.state.movies,
             director: movies.find(function (m) {
               return m.Director.Name === match.params.name;
             }).Director
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/genre/:name",
+        path: "/genres/:name",
         render: function render(_ref3) {
           var match = _ref3.match;
           if (!movies) return _react.default.createElement("div", {
             className: "main-view"
           });
           return _react.default.createElement(_genreView.GenreView, {
+            movies: _this3.state.movies,
             genre: movies.find(function (m) {
               return m.Genre.Name === match.params.name;
             }).Genre
