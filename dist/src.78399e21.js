@@ -52449,7 +52449,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         render: function render() {
           return _react.default.createElement(_profileView.ProfileView, {
             user: _this3.state.user,
-            movies: movies
+            movies: _this3.state.movies
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
