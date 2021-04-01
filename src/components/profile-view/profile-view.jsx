@@ -14,13 +14,13 @@ export class ProfileView extends React.Component {
       birthday: "",
       password: "",
       movies: "",
-      favoritemovies: []
+      favoriteMovies: []
     };
   }
 
 
   // GET user from API
-  getUser = (token, user) => {
+  /* getUser = (token, user) => {
     axios.get(`https://my-movie-overview.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(
@@ -47,7 +47,7 @@ export class ProfileView extends React.Component {
       });
       this.getUser(accessToken, localStorage.getItem('user'));
     }
-  }
+  } */
 
   formatDate(date) {
     if (date) date = date.substring(0, 10);
@@ -62,7 +62,7 @@ export class ProfileView extends React.Component {
     }).then(
       (response) => {
         console.log(response);
-        this.componentDidMount();
+        // this.componentDidMount();
       }
     ).catch(function (error) {
       console.log(error);

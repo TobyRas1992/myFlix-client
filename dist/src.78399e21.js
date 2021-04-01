@@ -51536,7 +51536,7 @@ function DirectorView(props) {
   }, " Movies by ", director.Name), _react.default.createElement(_reactBootstrap.Row, {
     className: "main-view justify-content-md-center"
   }, movies.map(function (m) {
-    if (m.Director.Name === director.Name) {
+    if (m.Director && m.Director.Name === director.Name) {
       return _react.default.createElement(_movieCard.MovieCard, {
         key: m._id,
         movie: m
@@ -51613,51 +51613,47 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ProfileView);
 
     _this = _super.call(this, props);
-
-    _this.getUser = function (token, user) {
-      _axios.default.get("https://my-movie-overview.herokuapp.com/users/".concat(user), {
-        headers: {
-          Authorization: "Bearer ".concat(token)
-        }
-      }).then(function (response) {
-        _this.setState({
-          username: response.data.Username,
-          email: response.data.Email,
-          birthday: _this.formatDate(response.data.Birthday),
-          password: response.data.Password,
-          favoriteMovies: response.data.favoriteMovies
-        });
-      }).catch(function (error) {
-        console.log(error);
-      });
-    };
-
     _this.state = {
       username: "",
       email: "",
       birthday: "",
       password: "",
       movies: "",
-      favoritemovies: []
+      favoriteMovies: []
     };
     return _this;
   } // GET user from API
 
+  /* getUser = (token, user) => {
+    axios.get(`https://my-movie-overview.herokuapp.com/users/${user}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(
+      response => {
+        this.setState({
+          username: response.data.Username,
+          email: response.data.Email,
+          birthday: this.formatDate(response.data.Birthday),
+          password: response.data.Password,
+          favoriteMovies: response.data.favoriteMovies
+        });
+      }
+    ).catch(function (error) {
+      console.log(error);
+    });
+  }
+   // Persisted authentication - keeps user details
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getUser(accessToken, localStorage.getItem('user'));
+    }
+  } */
+
 
   _createClass(ProfileView, [{
-    key: "componentDidMount",
-    value: // Persisted authentication - keeps user details
-    function componentDidMount() {
-      var accessToken = localStorage.getItem('token');
-
-      if (accessToken !== null) {
-        this.setState({
-          user: localStorage.getItem('user')
-        });
-        this.getUser(accessToken, localStorage.getItem('user'));
-      }
-    }
-  }, {
     key: "formatDate",
     value: function formatDate(date) {
       if (date) date = date.substring(0, 10);
@@ -51666,8 +51662,6 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "removeFavorite",
     value: function removeFavorite(movie) {
-      var _this2 = this;
-
       var token = localStorage.getItem("token");
       var user = localStorage.getItem("user");
 
@@ -51676,9 +51670,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
-        console.log(response);
-
-        _this2.componentDidMount();
+        console.log(response); // this.componentDidMount();
       }).catch(function (error) {
         console.log(error);
       });
@@ -51686,11 +51678,11 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var movies = this.props.movies;
       var favoriteMovieList = movies.filter(function (movie) {
-        return _this3.state.favoriteMovies.includes(movie._id);
+        return _this2.state.favoriteMovies.includes(movie._id);
       });
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("h2", {
         className: "text-center mb-4 white-words"
@@ -51734,7 +51726,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           variant: "danger",
           size: "sm",
           onClick: function onClick() {
-            return _this3.removeFavorite(movie);
+            return _this2.removeFavorite(movie);
           }
         }, "Remove")));
       })));
@@ -52308,7 +52300,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     function onLoggedIn(authData) {
       console.log(authData);
       this.setState({
-        user: authData.user.Username
+        user: authData.user
       });
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
@@ -52354,10 +52346,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           return _this3.onLoggedIn(user);
         },
         onReturnLogin: this.handleReturnLogin
-      });
-      if (!movies || !movies.length) return _react.default.createElement("div", {
-        className: "main-view"
-      });
+      }); // if (!movies && !movies.length) return <div className="main-view" />;
+
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("header", null, _react.default.createElement(_reactBootstrap.Navbar, {
         className: "navbar",
         collapseOnSelect: true,

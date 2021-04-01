@@ -72,7 +72,7 @@ export class MainView extends React.Component {
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
-      user: authData.user.Username
+      user: authData.user
     });
 
     localStorage.setItem('token', authData.token);
@@ -113,7 +113,7 @@ export class MainView extends React.Component {
       />
 
 
-    if (!movies || !movies.length) return <div className="main-view" />;
+    // if (!movies && !movies.length) return <div className="main-view" />;
 
     return (
       <Router>

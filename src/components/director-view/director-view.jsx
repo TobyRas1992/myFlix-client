@@ -8,6 +8,7 @@ import './director-view.scss'
 
 export function DirectorView(props) {
   const { director, movies } = props;
+
   if (!director) return null;
   const history = useHistory();
 
@@ -29,7 +30,7 @@ export function DirectorView(props) {
         <h5 className='text-center mb-4 white-words'> Movies by {director.Name}</h5>
         <Row className="main-view justify-content-md-center">
           {movies.map(m => {
-            if (m.Director.Name === director.Name) {
+            if (m.Director && m.Director.Name === director.Name) {
               return (
                 <MovieCard key={m._id} movie={m} />
               );
