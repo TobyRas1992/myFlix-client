@@ -52170,7 +52170,7 @@ MovieView.propTypes = {
       Description: _propTypes.default.string.isRequired
     })
   }).isRequired,
-  onClick: _propTypes.default.func.isRequired
+  onClick: _propTypes.default.func
 };
 },{"react":"../node_modules/react/index.js","../return-button/return-button":"components/return-button/return-button.jsx","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/main-view/main-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -52355,7 +52355,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         },
         onReturnLogin: this.handleReturnLogin
       });
-      if (!movies) return _react.default.createElement("div", {
+      if (!movies || !movies.length) return _react.default.createElement("div", {
         className: "main-view"
       });
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("header", null, _react.default.createElement(_reactBootstrap.Navbar, {
@@ -52420,7 +52420,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         path: "/directors/:name",
         render: function render(_ref2) {
           var match = _ref2.match;
-          if (!movies) return _react.default.createElement("div", {
+          if (!movies || !movies.length) return _react.default.createElement("div", {
             className: "main-view"
           });
           return _react.default.createElement(_directorView.DirectorView, {
@@ -52434,7 +52434,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         path: "/genres/:name",
         render: function render(_ref3) {
           var match = _ref3.match;
-          if (!movies) return _react.default.createElement("div", {
+          if (!movies || !movies.length) return _react.default.createElement("div", {
             className: "main-view"
           });
           return _react.default.createElement(_genreView.GenreView, {
@@ -52566,7 +52566,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54360" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62227" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
