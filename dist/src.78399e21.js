@@ -51274,14 +51274,15 @@ function LoginView(props) {
   var onRegister = props.onRegister;
 
   var handleSubmit = function handleSubmit(e) {
-    e.preventDefault(); //prevents default refresh/change page
+    e.preventDefault(); //prevents default refresh/change page when submitting form
 
     _axios.default.post('https://my-movie-overview.herokuapp.com/login/', {
       Username: username,
       Password: password
     }).then(function (response) {
-      var data = response.data;
-      props.onLoggedIn(data);
+      var data = response.data; // binds response auth data to variable 
+
+      props.onLoggedIn(data); // calls onLoggedIn, which was passed from MainView, and handles BOTH username and token.
     }).catch(function (e) {
       console.log('no such user');
     });
@@ -52258,30 +52259,18 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       hasAccount: true
     };
     return _this;
-  } //Persisted authentication - keeps user logged in
+  } // Gets movies from API
 
 
   _createClass(MainView, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var accessToken = localStorage.getItem('token');
-
-      if (accessToken !== null) {
-        this.setState({
-          user: localStorage.getItem('user')
-        });
-        this.getMovies(accessToken);
-      }
-    } // Gets movies from API
-
-  }, {
     key: "getMovies",
     value: function getMovies(token) {
       var _this2 = this;
 
       _axios.default.get('https://my-movie-overview.herokuapp.com/movies', {
         headers: {
-          Authorization: "Bearer ".concat(token)
+          Authorization: "Bearer ".concat(token) // passes bearer authorization in header of HTTP request.
+
         }
       }).then(function (response) {
         _this2.setState({
@@ -52298,31 +52287,35 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     key: "onLoggedIn",
     value: // Updates user in state on successful login
     function onLoggedIn(authData) {
+      // takes user + token as argument in authData.
       console.log(authData);
       this.setState({
-        user: authData.user
-      });
+        user: authData.user // saves user's username in the user state.
+
+      }); // Auth info saved in localStorage
+      // setItem method accepts 2 arguments (key + value)
+
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
-      this.getMovies(authData.token);
+      this.getMovies(authData.token); //gets movies once user is logged in
     } //Logs user out
 
   }, {
     key: "handleLogOut",
     value: function handleLogOut() {
+      // removes authenticated data from localStorage.
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       console.log('logged out successfully');
       window.open('/', '_self');
     } //Handler to navigate from MainView to MovieView
 
-  }, {
-    key: "onMovieClick",
-    value: function onMovieClick(movie) {
-      this.setState({
-        selectedMovie: movie
-      });
-    } //Handler to return from MovieView to MainView
+    /*   onMovieClick(movie) {
+        this.setState({
+          selectedMovie: movie
+        });
+      } */
+    //Handler to return from MovieView to MainView
 
   }, {
     key: "onReturnClick",
@@ -52330,6 +52323,20 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       this.setState({
         selectedMovie: null
       });
+    } //Persisted authentication - keeps user logged in after successful onLoggedIn()
+
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var accessToken = localStorage.getItem('token'); // get value of token from localStorage.
+
+      if (accessToken !== null) {
+        this.setState({
+          user: localStorage.getItem('user') // sets user state to user in localStorage.
+
+        });
+        this.getMovies(accessToken); // if user logged in, get movies from API.
+      }
     }
   }, {
     key: "render",
@@ -52556,7 +52563,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62227" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51922" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

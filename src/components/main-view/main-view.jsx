@@ -29,21 +29,12 @@ export class MainView extends React.Component {
     };
   }
 
-  //Persisted authentication - keeps user logged in
-  componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
-      this.getMovies(accessToken);
-    }
-  }
+
 
   // Gets movies from API
   getMovies(token) {
     axios.get('https://my-movie-overview.herokuapp.com/movies', {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` } // passes bearer authorization in header of HTTP request.
     }).then(response => {
       this.setState({
         movies: response.data
@@ -69,31 +60,37 @@ export class MainView extends React.Component {
   }
 
   // Updates user in state on successful login
-  onLoggedIn(authData) {
+  onLoggedIn(authData) { // takes user + token as argument in authData.
     console.log(authData);
     this.setState({
-      user: authData.user
+      user: authData.user // saves user's username in the user state.
     });
 
+    // Auth info saved in localStorage
+    // setItem method accepts 2 arguments (key + value)
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
-    this.getMovies(authData.token);
+    this.getMovies(authData.token); //gets movies once user is logged in
   }
 
   //Logs user out
   handleLogOut() {
+    // removes authenticated data from localStorage.
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     console.log('logged out successfully');
     window.open('/', '_self');
   }
 
+
   //Handler to navigate from MainView to MovieView
-  onMovieClick(movie) {
-    this.setState({
-      selectedMovie: movie
-    });
-  }
+  /*   onMovieClick(movie) {
+      this.setState({
+        selectedMovie: movie
+      });
+    } */
+
+
   //Handler to return from MovieView to MainView
   onReturnClick() {
     this.setState({
@@ -101,6 +98,16 @@ export class MainView extends React.Component {
     });
   }
 
+  //Persisted authentication - keeps user logged in after successful onLoggedIn()
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token'); // get value of token from localStorage.
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user') // sets user state to user in localStorage.
+      });
+      this.getMovies(accessToken); // if user logged in, get movies from API.
+    }
+  }
 
   render() {
     const { movies, user, hasAccount } = this.state;

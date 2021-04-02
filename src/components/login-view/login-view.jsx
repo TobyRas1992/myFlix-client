@@ -13,13 +13,13 @@ function LoginView(props) {
   const { onRegister } = props;
 
   const handleSubmit = (e) => {
-    e.preventDefault(); //prevents default refresh/change page
+    e.preventDefault(); //prevents default refresh/change page when submitting form
     axios.post('https://my-movie-overview.herokuapp.com/login/', {
       Username: username,
       Password: password
     }).then(response => {
-      const data = response.data;
-      props.onLoggedIn(data);
+      const data = response.data; // binds response auth data to variable 
+      props.onLoggedIn(data); // calls onLoggedIn, which was passed from MainView, and handles BOTH username and token.
     }).catch(e => {
       console.log('no such user')
     });
