@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom"; // Router implements state-based routing + route tells React the routes.
 
 import RegistrationView from '../registration-view/registration-view';
 import LoginView from '../login-view/login-view';
@@ -107,7 +107,7 @@ export class MainView extends React.Component {
     // if (!movies && !movies.length) return <div className="main-view" />;
 
     return (
-      <Router>
+      <Router> {/* implements state-based routing */}
         <React.Fragment>
           <header>
             <Navbar className="navbar" collapseOnSelect bg="dark" variant="dark" expand="lg">
@@ -124,7 +124,7 @@ export class MainView extends React.Component {
           </header>
           <Container className="my-3">
             <Row className="main-view justify-content-md-center">
-
+              {/* route components used for routing calls */}
               <Route exact path="/" render={() => {
                 if (!user)
                   return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={this.handleToRegister} />;
@@ -138,13 +138,13 @@ export class MainView extends React.Component {
 
               <Route path="/directors/:name" render={({ match }) => {
                 if (!movies || !movies.length) return <div className="main-view" />;
-                return <DirectorView movies={this.state.movies} director={movies.find(m => m.Director.Name === match.params.name).Director} />
+                return <DirectorView movies={this.state.movies} director={movies.find(m => m.Director.Name === match.params.name).Director} /> /* adding director key to returned object gets director information */
               }} />
 
               <Route path="/genres/:name"
                 render={({ match }) => {
                   if (!movies || !movies.length) return <div className="main-view" />;
-                  return <GenreView movies={this.state.movies} genre={movies.find(m => m.Genre.Name === match.params.name).Genre} />
+                  return <GenreView movies={this.state.movies} genre={movies.find(m => m.Genre.Name === match.params.name).Genre} /> /* adding genre key to returned movie object gets genre information  */
                 }
                 } />
 

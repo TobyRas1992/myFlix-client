@@ -51965,73 +51965,7 @@ function UpdateView() {
     onClick: handleDelete
   }, "Delete Account")))));
 }
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","axios":"../node_modules/axios/index.js","./update-view.scss":"components/update-view/update-view.scss"}],"components/return-button/return-button.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ReturnButton = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-var ReturnButton = /*#__PURE__*/function (_React$Component) {
-  _inherits(ReturnButton, _React$Component);
-
-  var _super = _createSuper(ReturnButton);
-
-  function ReturnButton() {
-    var _this;
-
-    _classCallCheck(this, ReturnButton);
-
-    _this = _super.call(this);
-    _this.state = {};
-    return _this;
-  }
-
-  _createClass(ReturnButton, [{
-    key: "render",
-    value: function render() {
-      var _onClick = this.props.onClick;
-      return _react.default.createElement("button", {
-        onClick: function onClick() {
-          return _onClick();
-        },
-        className: "return-button"
-      }, "Return to main page");
-    }
-  }]);
-
-  return ReturnButton;
-}(_react.default.Component);
-
-exports.ReturnButton = ReturnButton;
-},{"react":"../node_modules/react/index.js"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","axios":"../node_modules/axios/index.js","./update-view.scss":"components/update-view/update-view.scss"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -52045,8 +51979,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.MovieView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
-
-var _returnButton = require("../return-button/return-button");
 
 var _reactBootstrap = require("react-bootstrap");
 
@@ -52165,7 +52097,7 @@ MovieView.propTypes = {
   }).isRequired,
   onClick: _propTypes.default.func
 };
-},{"react":"../node_modules/react/index.js","../return-button/return-button":"components/return-button/return-button.jsx","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/main-view/main-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/main-view/main-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -52340,7 +52272,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         onReturnLogin: this.handleReturnLogin
       }); // if (!movies && !movies.length) return <div className="main-view" />;
 
-      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("header", null, _react.default.createElement(_reactBootstrap.Navbar, {
+      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, " ", _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("header", null, _react.default.createElement(_reactBootstrap.Navbar, {
         className: "navbar",
         collapseOnSelect: true,
         bg: "dark",
@@ -52411,6 +52343,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
               return m.Director.Name === match.params.name;
             }).Director
           });
+          /* adding director key to returned object gets director information */
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/genres/:name",
@@ -52425,6 +52358,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
               return m.Genre.Name === match.params.name;
             }).Genre
           });
+          /* adding genre key to returned movie object gets genre information  */
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/profile",
