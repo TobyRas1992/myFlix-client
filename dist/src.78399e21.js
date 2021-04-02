@@ -52308,21 +52308,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       localStorage.removeItem('user');
       console.log('logged out successfully');
       window.open('/', '_self');
-    } //Handler to navigate from MainView to MovieView
-
-    /*   onMovieClick(movie) {
-        this.setState({
-          selectedMovie: movie
-        });
-      } */
-    //Handler to return from MovieView to MainView
-
-  }, {
-    key: "onReturnClick",
-    value: function onReturnClick() {
-      this.setState({
-        selectedMovie: null
-      });
     } //Persisted authentication - keeps user logged in after successful onLoggedIn()
 
   }, {

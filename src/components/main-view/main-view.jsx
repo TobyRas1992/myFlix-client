@@ -82,22 +82,6 @@ export class MainView extends React.Component {
     window.open('/', '_self');
   }
 
-
-  //Handler to navigate from MainView to MovieView
-  /*   onMovieClick(movie) {
-      this.setState({
-        selectedMovie: movie
-      });
-    } */
-
-
-  //Handler to return from MovieView to MainView
-  onReturnClick() {
-    this.setState({
-      selectedMovie: null
-    });
-  }
-
   //Persisted authentication - keeps user logged in after successful onLoggedIn()
   componentDidMount() {
     let accessToken = localStorage.getItem('token'); // get value of token from localStorage.
