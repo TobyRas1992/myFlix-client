@@ -5,11 +5,27 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 import './movie-view.scss';
+import axios from 'axios';
 
 export class MovieView extends React.Component {
   constructor() {
     super();
     this.state = {};
+  }
+
+  addFavorite(movie) {
+    let token = localStorage.getItem('token');
+    let user = localStorage.getItem('user');
+    axios.post(`https://my-movie-overview.herokuapp.com/users/${user}/${movie._id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(
+      (response) => {
+        console.log(response);
+      }).catch(
+        function (error) {
+          console.log(error)
+        }
+      );
   }
 
   render() {
@@ -47,10 +63,14 @@ export class MovieView extends React.Component {
           <Button variant="link">Genre</Button>
         </Link>
 
+        <Button className='add-favorite'
+          variant='danger'
+          size='sm'
+          onClick={() => this.addFavorite(movie)}>Add to favorite movies</Button>
         <Link to={`/`}>
           <Button className="return-button" variant="link">Exit Movie View</Button>
         </Link>
-      </Card>
+      </Card >
     );
   }
 }
