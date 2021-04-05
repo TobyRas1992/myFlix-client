@@ -51874,8 +51874,7 @@ function UpdateView() {
 
 
   var handleDelete = function handleDelete() {
-    if (!confirm("Are you sure you want to delete your account?")) return; //explain logic for this?
-
+    if (!confirm("Are you sure you want to delete your account?")) return;
     var token = localStorage.getItem("token");
     var user = localStorage.getItem("user");
 

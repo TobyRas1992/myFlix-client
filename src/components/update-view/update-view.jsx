@@ -69,7 +69,7 @@ export function UpdateView() {
 
   // Deletes user account
   const handleDelete = () => {
-    if (!confirm("Are you sure you want to delete your account?")) return; //explain logic for this?
+    if (!confirm("Are you sure you want to delete your account?")) return;
     let token = localStorage.getItem("token");
     let user = localStorage.getItem("user");
     if (isValid) {
