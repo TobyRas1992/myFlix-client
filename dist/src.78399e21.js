@@ -51614,6 +51614,25 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ProfileView);
 
     _this = _super.call(this, props);
+
+    _this.getUser = function (token, user) {
+      _axios.default.get("https://my-movie-overview.herokuapp.com/users/".concat(user), {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        _this.setState({
+          username: response.data.Username,
+          email: response.data.Email,
+          birthday: _this.formatDate(response.data.Birthday),
+          password: response.data.Password,
+          favoriteMovies: response.data.FavoriteMovies
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    };
+
     _this.state = {
       username: "",
       email: "",
@@ -51625,36 +51644,21 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     return _this;
   } // GET user from API
 
-  /* getUser = (token, user) => {
-    axios.get(`https://my-movie-overview.herokuapp.com/users/${user}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(
-      response => {
-        this.setState({
-          username: response.data.Username,
-          email: response.data.Email,
-          birthday: this.formatDate(response.data.Birthday),
-          password: response.data.Password,
-          favoriteMovies: response.data.favoriteMovies
-        });
-      }
-    ).catch(function (error) {
-      console.log(error);
-    });
-  }
-   // Persisted authentication - keeps user details
-  componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
-      this.getUser(accessToken, localStorage.getItem('user'));
-    }
-  } */
-
 
   _createClass(ProfileView, [{
+    key: "componentDidMount",
+    value: // Persisted authentication - keeps user details
+    function componentDidMount() {
+      var accessToken = localStorage.getItem('token');
+
+      if (accessToken !== null) {
+        this.setState({
+          user: localStorage.getItem('user')
+        });
+        this.getUser(accessToken, localStorage.getItem('user'));
+      }
+    }
+  }, {
     key: "formatDate",
     value: function formatDate(date) {
       if (date) date = date.substring(0, 10);
@@ -51717,7 +51721,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           },
           className: "favorite-card"
         }, _react.default.createElement(_reactRouterDom.Link, {
-          to: "/movies/".concat(move._id)
+          to: "/movies/".concat(movie._id)
         }, _react.default.createElement(_reactBootstrap.Card.Img, {
           className: "movie-card-link",
           variant: "top",
@@ -52034,7 +52038,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       var token = localStorage.getItem('token');
       var user = localStorage.getItem('user');
 
-      _axios.default.post("https://my-movie-overview.herokuapp.com/users/".concat(user, "/").concat(movie._id), {
+      _axios.default.post("https://my-movie-overview.herokuapp.com/users/".concat(user, "/").concat(movie._id), {}, {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -52508,7 +52512,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51922" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51911" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

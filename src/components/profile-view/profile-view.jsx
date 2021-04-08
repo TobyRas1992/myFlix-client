@@ -20,7 +20,7 @@ export class ProfileView extends React.Component {
 
 
   // GET user from API
-  /* getUser = (token, user) => {
+  getUser = (token, user) => {
     axios.get(`https://my-movie-overview.herokuapp.com/users/${user}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(
@@ -30,7 +30,7 @@ export class ProfileView extends React.Component {
           email: response.data.Email,
           birthday: this.formatDate(response.data.Birthday),
           password: response.data.Password,
-          favoriteMovies: response.data.favoriteMovies
+          favoriteMovies: response.data.FavoriteMovies
         });
       }
     ).catch(function (error) {
@@ -47,7 +47,7 @@ export class ProfileView extends React.Component {
       });
       this.getUser(accessToken, localStorage.getItem('user'));
     }
-  } */
+  }
 
   formatDate(date) {
     if (date) date = date.substring(0, 10);
@@ -110,7 +110,7 @@ export class ProfileView extends React.Component {
             return (
               <div key={movie._id}>
                 <Card style={{ width: '10rem' }} className='favorite-card'>
-                  <Link to={`/movies/${move._id}`}>
+                  <Link to={`/movies/${movie._id}`}>
                     <Card.Img
                       className="movie-card-link"
                       variant="top"
