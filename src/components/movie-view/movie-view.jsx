@@ -1,14 +1,31 @@
 import React from 'react';
-import { ReturnButton } from '../return-button/return-button';
 import { Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+import { Link } from "react-router-dom";
+
 import './movie-view.scss';
+import axios from 'axios';
 
 export class MovieView extends React.Component {
   constructor() {
     super();
     this.state = {};
+  }
+
+  addFavorite(movie) {
+    let token = localStorage.getItem('token');
+    let user = localStorage.getItem('user');
+    axios.post(`https://my-movie-overview.herokuapp.com/users/${user}/${movie._id}`, {}, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(
+      (response) => {
+        console.log(response);
+      }).catch(
+        function (error) {
+          console.log(error)
+        }
+      );
   }
 
   render() {
@@ -37,8 +54,23 @@ export class MovieView extends React.Component {
             Released: {movie.Released}
           </ListGroupItem>
         </ListGroup>
-        <Button className="return-button" variant="info" onClick={() => onClick(movie)}>Return to Movie List</Button>
-      </Card>
+
+        <Link to={`/directors/${movie.Director.Name}`}>
+          <Button className="return-button" variant="link">Director</Button>
+        </Link>
+
+        <Link to={`/genres/${movie.Genre.Name}`}>
+          <Button variant="link">Genre</Button>
+        </Link>
+
+        <Button className='add-favorite'
+          variant='danger'
+          size='sm'
+          onClick={() => this.addFavorite(movie)}>Add to favorite movies</Button>
+        <Link to={`/`}>
+          <Button className="return-button" variant="link">Exit Movie View</Button>
+        </Link>
+      </Card >
     );
   }
 }
@@ -61,5 +93,5 @@ MovieView.propTypes = {
       Description: PropTypes.string.isRequired
     })
   }).isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func
 }

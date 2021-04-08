@@ -1,12 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 
+import { BrowserRouter as Router, Route } from "react-router-dom"; // Router implements state-based routing + route tells React the routes.
+
 import RegistrationView from '../registration-view/registration-view';
 import LoginView from '../login-view/login-view';
+import { GenreView } from "../genre-view/genre-view";
+import { DirectorView } from "../director-view/director-view";
+import { ProfileView } from "../profile-view/profile-view";
+import { UpdateView } from "../update-view/update-view";
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
-import { Row, Col, Container, Navbar, Nav } from 'react-bootstrap';
+import { Row, Col, Container, Navbar, Nav, Jumbotron } from 'react-bootstrap';
 
 
 import './main-view.scss';
@@ -16,26 +22,26 @@ export class MainView extends React.Component {
     super();
 
     this.state = {
-      movies: null,
+      movies: [],
       selectedMovie: null,
       user: null,
       hasAccount: true
     };
   }
 
-  //GETS movies with hook
-  componentDidMount() {
-    axios
-      .get('https://my-movie-overview.herokuapp.com/movies')
-      .then(response => {
-        // Assign the result to the state + tells DOM state has changed
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
+
+
+  // Gets movies from API
+  getMovies(token) {
+    axios.get('https://my-movie-overview.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` } // passes bearer authorization in header of HTTP request.
+    }).then(response => {
+      this.setState({
+        movies: response.data
       });
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
 
   // FUNCTIONS
@@ -54,81 +60,109 @@ export class MainView extends React.Component {
   }
 
   // Updates user in state on successful login
-  onLoggedIn(user) {
+  onLoggedIn(authData) { // takes user + token as argument in authData.
+    console.log(authData);
     this.setState({
-      user, hasAccount: true
+      user: authData.user // saves user's username in the user state.
     });
+
+    // Auth info saved in localStorage
+    // setItem method accepts 2 arguments (key + value)
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token); //gets movies once user is logged in
   }
 
-  //Handler to navigate from MainView to MovieView
-  onMovieClick(movie) {
-    this.setState({
-      selectedMovie: movie
-    });
-  }
-  //Handler to return from MovieView to MainView
-  onReturnClick() {
-    this.setState({
-      selectedMovie: null
-    });
+  //Logs user out
+  handleLogOut() {
+    // removes authenticated data from localStorage.
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    console.log('logged out successfully');
+    window.open('/', '_self');
   }
 
-
+  //Persisted authentication - keeps user logged in after successful onLoggedIn()
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token'); // get value of token from localStorage.
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user') // sets user state to user in localStorage.
+      });
+      this.getMovies(accessToken); // if user logged in, get movies from API.
+    }
+  }
 
   render() {
-    const { movies, selectedMovie, user, hasAccount } = this.state;
+    const { movies, user, hasAccount } = this.state;
 
     // on LoginView, when 'New User Sign Up' is clicked, goes to RegistrationView
     if (!hasAccount)
-      return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} onReturnLogin={this.handleReturnLogin} />
-
-    // Renders LoginView if no user
-    if (!user)
-      return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={this.handleToRegister} />;
-
+      return <RegistrationView
+        onLoggedIn={user => this.onLoggedIn(user)}
+        onReturnLogin={this.handleReturnLogin}
+      />
 
 
-
-
-
-    if (!movies) return <div className="main-view" />;
+    // if (!movies && !movies.length) return <div className="main-view" />;
 
     return (
-      <React.Fragment>
-        <Navbar className="navbar" bg="dark" variant="dark" expand="md">
-          <Navbar.Brand href="#home">myFlix Movie Database</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Profile</Nav.Link>
-              <Nav.Link href="http://localhost:1234">LogOut</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-        <Container className="my-3">
-          <Row className="main-view justify-content-md-center">
-            {selectedMovie
-              ? (
-                <Row className="justify-content-md-center">
-                  <Col md={8}>
-                    <MovieView movie={selectedMovie} onClick={() => this.onReturnClick()} />
-                  </Col>
-                </Row>
-              )
-              : (
-                <Row className="justify-content-md-center">
-                  {movies.map(movie => (
-                    <Col md={3}>
-                      <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)} />
-                    </Col>
-                  ))}
-                </Row>
-              )
-            }
-          </Row>
-        </Container>
-      </React.Fragment>
+      <Router> {/* implements state-based routing */}
+        <React.Fragment>
+          <header>
+            <Navbar className="navbar" collapseOnSelect bg="dark" variant="dark" expand="lg">
+              <Navbar.Brand href="#home">myFlix Movie Database</Navbar.Brand>
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto">
+                  <Nav.Link href="/">Home</Nav.Link>
+                  <Nav.Link href="/profile">Profile</Nav.Link>
+                  <Nav.Link onClick={() => this.handleLogOut()}>LogOut</Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+          </header>
+          <Container className="my-3">
+            <Row className="main-view justify-content-md-center">
+              {/* route components used for routing calls */}
+              <Route exact path="/" render={() => {
+                if (!user)
+                  return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={this.handleToRegister} />;
+                return movies.map(m => <MovieCard key={m._id} movie={m} />)
+              }
+              } />
+
+              <Route path="/register" render={() => <RegistrationView />} />
+
+              <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
+
+              <Route path="/directors/:name" render={({ match }) => {
+                if (!movies || !movies.length) return <div className="main-view" />;
+                return <DirectorView movies={this.state.movies} director={movies.find(m => m.Director.Name === match.params.name).Director} /> /* adding director key to returned object gets director information */
+              }} />
+
+              <Route path="/genres/:name"
+                render={({ match }) => {
+                  if (!movies || !movies.length) return <div className="main-view" />;
+                  return <GenreView movies={this.state.movies} genre={movies.find(m => m.Genre.Name === match.params.name).Genre} /> /* adding genre key to returned movie object gets genre information  */
+                }
+                } />
+
+              <Route path="/profile" render={() => <ProfileView user={this.state.user} movies={this.state.movies} />} />
+
+              <Route path='/update' render={() => <UpdateView />} />
+
+            </Row>
+          </Container>
+          <Jumbotron fluid className="text-center">
+            <h1>myFlix Movie DataBase</h1>
+            <p>The collection of my favorite movies</p>
+          </Jumbotron>
+          <footer className="fixed-bottom bg-dark text-white text-center">
+            <p>Copyright; 2021 myFlix. All rights reserved</p>
+          </footer>
+        </React.Fragment>
+      </Router>
     );
   }
 }

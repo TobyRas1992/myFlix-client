@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button, Navbar, Container } from 'react-bootstrap';
+import { Form, Button, Navbar, Container, Spinner } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; //use link for redirecting back to login
+
+import axios from 'axios';
 
 import './registration-view.scss';
 
@@ -9,12 +12,60 @@ function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [birthday, setBirthday] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [usernameErr, setUsernameErr] = useState({});
+  const [emailErr, setEmailErr] = useState({});
+  const [passwordErr, setPasswordErr] = useState({});
+
+  const [loading, setLoading] = useState(false);
+
+  const formValidation = () => {
+    const usernameErr = {};
+    const passwordErr = {};
+    const emailErr = {};
+    let isValid = true;
+
+    if (username.trim().length < 6) {
+      usernameErr.usernameShort = "Username must be at least 6 characters";
+      isValid = false;
+    }
+
+    if (!password || password.length < 5) {
+      passwordErr.passwordMissing = "Password must be at least 5 characters"
+    }
+
+    if (!email.includes(".") && !email.includes("@")) {
+      emailErr.emailNotEmail = "A valid email address is required";
+    }
+
+    setUsernameErr(usernameErr);
+    setPasswordErr(passwordErr);
+    setEmailErr(emailErr);
+    return isValid;
+  }
+  const { handleReturnLogin } = props;
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
-    console.log(username, email, password, birthday);
-    props.onLoggedIn(username);
+    setLoading(true);
+    const isValid = formValidation();
+    if (isValid) {
+      axios.post(
+        'https://my-movie-overview.herokuapp.com/users', {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+      })
+        .then(response => {
+          const data = response.data;
+          console.log(data);
+          window.open('/', '_self');
+          alert('New Account created - now log in')
+        }).catch(() => {
+          console.log('error registering the user')
+        })
+    }
   };
 
 
@@ -24,9 +75,15 @@ function RegistrationView(props) {
         <Navbar.Brand>myFlix Movie Database</Navbar.Brand>
       </Navbar>
 
-      <Container className="my-5">
-        <Form>
+      <Container className="my-4 w-50 p-3">
+        <h2 className="text-center mb-4">
+          Welcome to myFlix Movie Database!
+      </h2>
+        <p className="text-center">
+          Create an account and start exploring.
+      </p>
 
+        <Form>
           <Form.Group controlId="formUsername">
             <Form.Label>Registration</Form.Label>
             <Form.Control
@@ -35,6 +92,13 @@ function RegistrationView(props) {
               placeholder="Username"
               onChange={e => setUsername(e.target.value)}
             />
+            {Object.keys(usernameErr).map((key) => {
+              return (
+                <div key={key} style={{ color: "red" }}>
+                  {usernameErr[key]}
+                </div>
+              );
+            })}
           </Form.Group>
 
           <Form.Group controlId="formEmail">
@@ -44,6 +108,13 @@ function RegistrationView(props) {
               placeholder="Email"
               onChange={e => setEmail(e.target.value)}
             />
+            {Object.keys(emailErr).map((key) => {
+              return (
+                <div key={key} style={{ color: "red" }}>
+                  {emailErr[key]}
+                </div>
+              );
+            })}
             <Form.Text className="text-muted">We will never share your email with anyone else</Form.Text>
           </Form.Group>
 
@@ -51,7 +122,7 @@ function RegistrationView(props) {
             <Form.Control
               type="text"
               value={birthday}
-              placeholder="Birthday"
+              placeholder="Date of Birth (YYYY-MM-DD)"
               onChange={e => setBirthday(e.target.value)}
             />
           </Form.Group>
@@ -63,22 +134,30 @@ function RegistrationView(props) {
               placeholder="Password"
               onChange={e => setPassword(e.target.value)}
             />
+            {Object.keys(passwordErr).map((key) => {
+              return (
+                <div key={key} style={{ color: "red" }}>
+                  {passwordErr[key]}
+                </div>
+              );
+            })}
           </Form.Group>
 
-          <Form.Group controlId="formConfirmPassword">
-            <Form.Control
-              type="password"
-              value={confirmPassword}
-              placeholder="Confirm Password"
-              onChange={e => setConfirmPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Button variant="info" type="submit" onClick={handleSubmitClick}>Sign Up</Button>
+          {!loading && <Button variant="info" type="submit" onClick={handleSubmitClick}>Sign Up</Button>}
+          {loading && <Button variant="info" type="submit" disabled>
+            <Spinner animation="border" variant="danger" /></Button>}
         </Form>
+        <small>
+          Already have an account?
+        <span onClick={handleReturnLogin} className="register text-danger ml-2ak">
+            Return to Log In
+        </span>
+        </small>
       </Container>
     </React.Fragment>
   );
 }
+
 
 RegistrationView.propTypes = {
   username: PropTypes.string,

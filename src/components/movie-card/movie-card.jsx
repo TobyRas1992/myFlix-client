@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
 
+import { Link } from "react-router-dom";
+
 import './movie-card.scss';
 
 
 export class MovieCard extends React.Component {
   render() {
-    // creates variables from the props passed from MainView - uses destructuring
-    const { movie, onClick } = this.props;
+    const { movie } = this.props;
 
     return (
       <Card className="movie-card">
@@ -16,7 +17,9 @@ export class MovieCard extends React.Component {
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>Released: {movie.Released}</Card.Text>
-          <Button variant="info" onClick={() => onClick(movie)}>Show more info</Button>
+          <Link to={`/movies/${movie._id}`}>
+            <Button variant="link">Show more info</Button>
+          </Link>
         </Card.Body>
       </Card>
     );
@@ -28,6 +31,5 @@ MovieCard.propTypes = {
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
     Released: PropTypes.string,
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
+  }).isRequired
 }

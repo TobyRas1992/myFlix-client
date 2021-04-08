@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Navbar } from 'react-bootstrap';
-
+import axios from 'axios';
 
 import './login-view.scss';
 
 function LoginView(props) {
+  // Hook useState() allows functional component to manipulate state
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const { onRegister } = props;
 
   const handleSubmit = (e) => {
-    e.preventDefault(); //prevents default refresh/change page
-    console.log(username, password);
-    props.onLoggedIn(username);
+    e.preventDefault(); //prevents default refresh/change page when submitting form
+    axios.post('https://my-movie-overview.herokuapp.com/login/', {
+      Username: username,
+      Password: password
+    }).then(response => {
+      const data = response.data; // binds response auth data to variable 
+      props.onLoggedIn(data); // calls onLoggedIn, which was passed from MainView, and handles BOTH username and token.
+    }).catch(e => {
+      console.log('no such user')
+    });
   };
 
   return (
     <React.Fragment>
-      <Navbar className="navbar" bg="dark" variant="dark">
-        <Navbar.Brand>myFlix Movie Database</Navbar.Brand>
-      </Navbar>
       <Form className="form-login">
         <h1 className="text-danger">Welcome to myFlix!</h1>
         <p className="mb-5">Please login to continue.</p>
