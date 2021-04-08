@@ -16,7 +16,7 @@ export class MovieView extends React.Component {
   addFavorite(movie) {
     let token = localStorage.getItem('token');
     let user = localStorage.getItem('user');
-    axios.post(`https://my-movie-overview.herokuapp.com/users/${user}/${movie._id}`, {
+    axios.post(`https://my-movie-overview.herokuapp.com/users/${user}/${movie._id}`, {}, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(
       (response) => {
