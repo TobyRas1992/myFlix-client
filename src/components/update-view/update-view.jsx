@@ -10,19 +10,19 @@ export function UpdateView() {
   const [password, setPassword] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const [usernameErr, setUsernameErr] = useState({}); // Have John explain to me what this does
+  const [usernameErr, setUsernameErr] = useState({}); // John: what does useState({}) do?
   const [passwordErr, setPasswordErr] = useState({});
   const [emailErr, setEmailErr] = useState({});
 
   // Validates input data
-  const formValidation = () => {
+  const formValidation = () => { //John: how does usernameErr work?
     const usernameErr = {};
     const passwordErr = {};
     const emailErr = {};
     let isValid = true;
 
     if (username.trim().length < 6) {
-      usernameErr.usernameShort = "Username must be at least 6 characters"; //where does usernameShort come from?
+      usernameErr.usernameShort = "Username must be at least 6 characters"; // John: where does usernameShort come from?
       isValid = false;
     }
 
@@ -68,7 +68,7 @@ export function UpdateView() {
   }
 
   // Deletes user account
-  const handleDelete = () => {
+  const handleDelete = () => { // John: should this be handled by Redux?
     if (!confirm("Are you sure you want to delete your account?")) return;
     let token = localStorage.getItem("token");
     let user = localStorage.getItem("user");
@@ -96,8 +96,8 @@ export function UpdateView() {
             <Form.Control
               type="text"
               value={username}
-              onChange={e => setUsername(e.target.value)} />
-            {Object.keys(usernameErr).map((key) => { // How does this error check work?
+              onChange={e => setUsername(e.target.value)} /> {/* John: how does onChange store Username? */}
+            {Object.keys(usernameErr).map((key) => { // John: How does this error check work?
               return (
                 <div key={key} style={{ color: "red" }}>{usernameErr[key]}</div>
               );

@@ -54,7 +54,7 @@ export class ProfileView extends React.Component {
     return date;
   }
 
-  removeFavorite(movie) {
+  removeFavorite(movie) { // ask John if Redux will be used for this. 
     let token = localStorage.getItem("token");
     let user = localStorage.getItem("user");
     axios.delete(`https://my-movie-overview.herokuapp.com/users/${user}/${movie._id}`, {
@@ -71,7 +71,7 @@ export class ProfileView extends React.Component {
 
   render() {
     const { movies } = this.props;
-    const favoriteMovieList = movies.filter(movie => {
+    const favoriteMovieList = movies.filter(movie => { // John: why doesn't this return just one movie?
       return this.state.favoriteMovies.includes(movie._id);
     });
 

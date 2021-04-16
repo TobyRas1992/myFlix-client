@@ -10,7 +10,7 @@ import axios from 'axios';
 export class MovieView extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {}; // John: when we initialize an empty state in a class component, what happens with the state in MainView? 
   }
 
   addFavorite(movie) {

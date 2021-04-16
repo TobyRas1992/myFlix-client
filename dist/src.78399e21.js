@@ -51649,6 +51649,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: // Persisted authentication - keeps user details
     function componentDidMount() {
+      console.log("mounted");
       var accessToken = localStorage.getItem('token');
 
       if (accessToken !== null) {
@@ -52512,7 +52513,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51911" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54008" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

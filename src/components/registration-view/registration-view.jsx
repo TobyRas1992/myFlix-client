@@ -17,7 +17,7 @@ function RegistrationView(props) {
   const [emailErr, setEmailErr] = useState({});
   const [passwordErr, setPasswordErr] = useState({});
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // John: how does this loading work? 
 
   const formValidation = () => {
     const usernameErr = {};
@@ -143,7 +143,7 @@ function RegistrationView(props) {
             })}
           </Form.Group>
 
-          {!loading && <Button variant="info" type="submit" onClick={handleSubmitClick}>Sign Up</Button>}
+          {!loading && <Button variant="info" type="submit" onClick={handleSubmitClick}>Sign Up</Button>}  {/* John: go over the logic for this */}
           {loading && <Button variant="info" type="submit" disabled>
             <Spinner animation="border" variant="danger" /></Button>}
         </Form>
