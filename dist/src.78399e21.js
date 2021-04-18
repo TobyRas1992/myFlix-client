@@ -51033,6 +51033,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function _readOnlyError(name) { throw new TypeError("\"" + name + "\" is read-only"); }
+
 function RegistrationView(props) {
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -51054,17 +51056,17 @@ function RegistrationView(props) {
       birthday = _useState8[0],
       setBirthday = _useState8[1];
 
-  var _useState9 = (0, _react.useState)({}),
+  var _useState9 = (0, _react.useState)(''),
       _useState10 = _slicedToArray(_useState9, 2),
       usernameErr = _useState10[0],
       setUsernameErr = _useState10[1];
 
-  var _useState11 = (0, _react.useState)({}),
+  var _useState11 = (0, _react.useState)(''),
       _useState12 = _slicedToArray(_useState11, 2),
       emailErr = _useState12[0],
       setEmailErr = _useState12[1];
 
-  var _useState13 = (0, _react.useState)({}),
+  var _useState13 = (0, _react.useState)(''),
       _useState14 = _slicedToArray(_useState13, 2),
       passwordErr = _useState14[0],
       setPasswordErr = _useState14[1];
@@ -51072,34 +51074,32 @@ function RegistrationView(props) {
   var _useState15 = (0, _react.useState)(false),
       _useState16 = _slicedToArray(_useState15, 2),
       loading = _useState16[0],
-      setLoading = _useState16[1];
+      setLoading = _useState16[1]; // John: how does this loading work? 
+
 
   var formValidation = function formValidation() {
-    var usernameErr = {};
-    var passwordErr = {};
-    var emailErr = {};
-    var isValid = true;
-
     if (username.trim().length < 6) {
-      usernameErr.usernameShort = "Username must be at least 6 characters";
-      isValid = false;
+      usernameErr = (_readOnlyError("usernameErr"), "Username must be at least 6 characters");
+    } else {
+      setUsernameErr('');
     }
 
     if (!password || password.length < 5) {
-      passwordErr.passwordMissing = "Password must be at least 5 characters";
+      passwordErr = (_readOnlyError("passwordErr"), "Password must be at least 5 characters");
+    } else {
+      setPasswordErr('');
     }
 
     if (!email.includes(".") && !email.includes("@")) {
-      emailErr.emailNotEmail = "A valid email address is required";
+      emailErr = (_readOnlyError("emailErr"), "A valid email address is required");
+    } else {
+      setEmailErr('');
     }
 
-    setUsernameErr(usernameErr);
-    setPasswordErr(passwordErr);
-    setEmailErr(emailErr);
-    return isValid;
+    return usernameErr || passwordErr || emailErr;
   };
 
-  var handleReturnLogin = props.handleReturnLogin;
+  var handleReturnLogin = props.handleReturnLogin; //John: what does this do?
 
   var handleSubmitClick = function handleSubmitClick(e) {
     e.preventDefault();
@@ -51119,6 +51119,7 @@ function RegistrationView(props) {
         alert('New Account created - now log in');
       }).catch(function () {
         console.log('error registering the user');
+        setLoading(false);
       });
     }
   };
@@ -51142,14 +51143,11 @@ function RegistrationView(props) {
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     }
-  }), Object.keys(usernameErr).map(function (key) {
-    return _react.default.createElement("div", {
-      key: key,
-      style: {
-        color: "red"
-      }
-    }, usernameErr[key]);
-  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+  }), _react.default.createElement("div", {
+    style: {
+      color: "red"
+    }
+  }, usernameErr)), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formEmail"
   }, _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "email",
@@ -51158,14 +51156,11 @@ function RegistrationView(props) {
     onChange: function onChange(e) {
       return setEmail(e.target.value);
     }
-  }), Object.keys(emailErr).map(function (key) {
-    return _react.default.createElement("div", {
-      key: key,
-      style: {
-        color: "red"
-      }
-    }, emailErr[key]);
-  }), _react.default.createElement(_reactBootstrap.Form.Text, {
+  }), _react.default.createElement("div", {
+    style: {
+      color: "red"
+    }
+  }, emailErr), _react.default.createElement(_reactBootstrap.Form.Text, {
     className: "text-muted"
   }, "We will never share your email with anyone else")), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBirthday"
@@ -51185,18 +51180,15 @@ function RegistrationView(props) {
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  }), Object.keys(passwordErr).map(function (key) {
-    return _react.default.createElement("div", {
-      key: key,
-      style: {
-        color: "red"
-      }
-    }, passwordErr[key]);
-  })), !loading && _react.default.createElement(_reactBootstrap.Button, {
+  }), _react.default.createElement("div", {
+    style: {
+      color: "red"
+    }
+  }, passwordErr)), !loading && _react.default.createElement(_reactBootstrap.Button, {
     variant: "info",
     type: "submit",
     onClick: handleSubmitClick
-  }, "Sign Up"), loading && _react.default.createElement(_reactBootstrap.Button, {
+  }, "Sign Up"), "  ", loading && _react.default.createElement(_reactBootstrap.Button, {
     variant: "info",
     type: "submit",
     disabled: true
@@ -51445,7 +51437,8 @@ function GenreView(props) {
   var genre = props.genre,
       movies = props.movies;
   if (!genre) return null;
-  var history = (0, _reactRouterDom.useHistory)();
+  var history = (0, _reactRouterDom.useHistory)(); // John: how does useHistory work?  I've read the docs, but it's pretty dense. 
+
   return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Container, {
     className: "my-3 w-50 p-3"
   }, _react.default.createElement(_reactBootstrap.Card, {
@@ -51467,6 +51460,7 @@ function GenreView(props) {
   }, genre.Name, " Movies:"), _react.default.createElement(_reactBootstrap.Row, {
     className: "main-view justify-content-md-center"
   }, movies.map(function (m) {
+    // John: help me understand the map function fully. what is m?
     if (m.Genre.Name === genre.Name) {
       return _react.default.createElement(_movieCard.MovieCard, {
         key: m._id,
@@ -51532,7 +51526,7 @@ function DirectorView(props) {
     onClick: function onClick() {
       return history.goBack();
     }
-  }, "Return to movie"))))), _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("h5", {
+  }, "Return to movie"), " ")))), _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("h5", {
     className: "text-center mb-4 white-words"
   }, " Movies by ", director.Name), _react.default.createElement(_reactBootstrap.Row, {
     className: "main-view justify-content-md-center"
@@ -51649,7 +51643,6 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: // Persisted authentication - keeps user details
     function componentDidMount() {
-      console.log("mounted");
       var accessToken = localStorage.getItem('token');
 
       if (accessToken !== null) {
@@ -51668,6 +51661,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "removeFavorite",
     value: function removeFavorite(movie) {
+      // ask John if Redux will be used for this. 
       var token = localStorage.getItem("token");
       var user = localStorage.getItem("user");
 
@@ -51688,6 +51682,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
       var movies = this.props.movies;
       var favoriteMovieList = movies.filter(function (movie) {
+        // John: why doesn't this return just one movie?
         return _this2.state.favoriteMovies.includes(movie._id);
       });
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("h2", {
@@ -51803,49 +51798,42 @@ function UpdateView() {
       birthday = _useState8[0],
       setBirthday = _useState8[1];
 
-  var _useState9 = (0, _react.useState)({}),
+  var _useState9 = (0, _react.useState)(''),
       _useState10 = _slicedToArray(_useState9, 2),
       usernameErr = _useState10[0],
-      setUsernameErr = _useState10[1]; // Have John explain to me what this does
+      setUsernameErr = _useState10[1];
 
-
-  var _useState11 = (0, _react.useState)({}),
+  var _useState11 = (0, _react.useState)(''),
       _useState12 = _slicedToArray(_useState11, 2),
       passwordErr = _useState12[0],
       setPasswordErr = _useState12[1];
 
-  var _useState13 = (0, _react.useState)({}),
+  var _useState13 = (0, _react.useState)(''),
       _useState14 = _slicedToArray(_useState13, 2),
       emailErr = _useState14[0],
       setEmailErr = _useState14[1]; // Validates input data
 
 
   var formValidation = function formValidation() {
-    var usernameErr = {};
-    var passwordErr = {};
-    var emailErr = {};
-    var isValid = true;
-
     if (username.trim().length < 6) {
-      usernameErr.usernameShort = "Username must be at least 6 characters"; //where does usernameShort come from?
-
-      isValid = false;
+      setUsernameErr("Username must be at least 6 characters");
+    } else {
+      setUsernameErr('');
     }
 
     if (password.trim().length < 5) {
-      passwordErr.passwordMissing = "Password must be at least 5 characters";
-      isValid = false;
+      setPasswordErr("Password must be at least 5 characters");
+    } else {
+      setPasswordErr('');
     }
 
     if (!email.includes(".") && !email.includes("@")) {
-      emailErr.emailNotEmail = "A valid email address is required";
-      isValid = false;
+      setEmailErr("A valid email address is required");
+    } else {
+      setEmailErr('');
     }
 
-    setUsernameErr(usernameErr);
-    setPasswordErr(passwordErr);
-    setEmailErr(emailErr);
-    return isValid;
+    return usernameErr || passwordErr || emailErr;
   }; // Updates user details
 
 
@@ -51875,10 +51863,11 @@ function UpdateView() {
         console.log("Account details did not update");
       });
     }
-  }; // Deletes user account
+  }; // Deletes user account 
 
 
   var handleDelete = function handleDelete() {
+    // John: should this be handled by Redux? - J says no. 
     if (!confirm("Are you sure you want to delete your account?")) return;
     var token = localStorage.getItem("token");
     var user = localStorage.getItem("user");
@@ -51911,15 +51900,11 @@ function UpdateView() {
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     }
-  }), Object.keys(usernameErr).map(function (key) {
-    // How does this error check work?
-    return _react.default.createElement("div", {
-      key: key,
-      style: {
-        color: "red"
-      }
-    }, usernameErr[key]);
-  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+  }), " ", _react.default.createElement("div", {
+    style: {
+      color: "red"
+    }
+  }, usernameErr)), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formEmail"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Email"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "email",
@@ -51927,14 +51912,11 @@ function UpdateView() {
     onChange: function onChange(e) {
       return setEmail(e.target.value);
     }
-  }), Object.keys(emailErr).map(function (key) {
-    return _react.default.createElement("div", {
-      key: key,
-      style: {
-        color: "red"
-      }
-    }, emailErr[key]);
-  })), _react.default.createElement(_reactBootstrap.Form.Group, {
+  }), _react.default.createElement("div", {
+    style: {
+      color: "red"
+    }
+  }, emailErr)), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBirthday"
   }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthday"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "text",
@@ -51951,14 +51933,11 @@ function UpdateView() {
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  }), Object.keys(passwordErr).map(function (key) {
-    return _react.default.createElement("div", {
-      key: key,
-      style: {
-        color: "red"
-      }
-    }, passwordErr[key]);
-  })), _react.default.createElement(_reactBootstrap.Button, {
+  }), _react.default.createElement("div", {
+    style: {
+      color: "red"
+    }
+  }, passwordErr)), _react.default.createElement(_reactBootstrap.Button, {
     className: "update-button",
     variant: "info",
     onClick: updateDetails
@@ -52029,7 +52008,8 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MovieView);
 
     _this = _super.call(this);
-    _this.state = {};
+    _this.state = {}; // John: when we initialize an empty state in a class component, what happens with the state in MainView? JOHN - MainView is unmounted. State only relevant to this component. 
+
     return _this;
   }
 
@@ -52513,7 +52493,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54008" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54221" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -29,7 +29,7 @@ function movies(state = [], action) {
 }
 
 // John: I'm assuming the state for this reducer should be set to an array, since it will be holding a user object? 
-function users(state = [], action) {
+function users(state = {}, action) {
   switch (action.type) {
     case DEL_USER:
       return action.value;

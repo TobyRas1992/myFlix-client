@@ -10,7 +10,7 @@ import axios from 'axios';
 export class MovieView extends React.Component {
   constructor() {
     super();
-    this.state = {}; // John: when we initialize an empty state in a class component, what happens with the state in MainView? 
+    this.state = {}; // John: when we initialize an empty state in a class component, what happens with the state in MainView? JOHN - MainView is unmounted. State only relevant to this component. 
   }
 
   addFavorite(movie) {

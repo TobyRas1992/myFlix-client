@@ -10,36 +10,31 @@ export function UpdateView() {
   const [password, setPassword] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const [usernameErr, setUsernameErr] = useState({}); // John: what does useState({}) do?
-  const [passwordErr, setPasswordErr] = useState({});
-  const [emailErr, setEmailErr] = useState({});
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [emailErr, setEmailErr] = useState('');
 
   // Validates input data
-  const formValidation = () => { //John: how does usernameErr work?
-    const usernameErr = {};
-    const passwordErr = {};
-    const emailErr = {};
-    let isValid = true;
-
+  const formValidation = () => {
     if (username.trim().length < 6) {
-      usernameErr.usernameShort = "Username must be at least 6 characters"; // John: where does usernameShort come from?
-      isValid = false;
+      setUsernameErr("Username must be at least 6 characters");
+    } else {
+      setUsernameErr('');
     }
 
     if (password.trim().length < 5) {
-      passwordErr.passwordMissing = "Password must be at least 5 characters";
-      isValid = false;
+      setPasswordErr("Password must be at least 5 characters");
+    } else {
+      setPasswordErr('');
     }
 
     if (!email.includes(".") && !email.includes("@")) {
-      emailErr.emailNotEmail = "A valid email address is required";
-      isValid = false;
+      setEmailErr("A valid email address is required");
+    } else {
+      setEmailErr('');
     }
 
-    setUsernameErr(usernameErr);
-    setPasswordErr(passwordErr);
-    setEmailErr(emailErr);
-    return isValid;
+    return usernameErr || passwordErr || emailErr;
   }
 
   // Updates user details
@@ -67,8 +62,8 @@ export function UpdateView() {
     }
   }
 
-  // Deletes user account
-  const handleDelete = () => { // John: should this be handled by Redux?
+  // Deletes user account 
+  const handleDelete = () => { // John: should this be handled by Redux? - J says no. 
     if (!confirm("Are you sure you want to delete your account?")) return;
     let token = localStorage.getItem("token");
     let user = localStorage.getItem("user");
@@ -96,12 +91,9 @@ export function UpdateView() {
             <Form.Control
               type="text"
               value={username}
-              onChange={e => setUsername(e.target.value)} /> {/* John: how does onChange store Username? */}
-            {Object.keys(usernameErr).map((key) => { // John: How does this error check work?
-              return (
-                <div key={key} style={{ color: "red" }}>{usernameErr[key]}</div>
-              );
-            })}
+              onChange={e => setUsername(e.target.value)}
+            /> {/* John: how does onChange store Username? */}
+            <div style={{ color: "red" }}>{usernameErr}</div>
           </Form.Group>
 
           <Form.Group controlId="formEmail">
@@ -110,11 +102,7 @@ export function UpdateView() {
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)} />
-            {Object.keys(emailErr).map((key) => {
-              return (
-                <div key={key} style={{ color: "red" }}>{emailErr[key]}</div>
-              );
-            })}
+            <div style={{ color: "red" }}>{emailErr}</div>
           </Form.Group>
 
           <Form.Group controlId="formBirthday">
@@ -132,13 +120,7 @@ export function UpdateView() {
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)} />
-            {Object.keys(passwordErr).map((key) => {
-              return (
-                <div key={key} style={{ color: "red" }}>
-                  {passwordErr[key]}
-                </div>
-              );
-            })}
+            <div style={{ color: "red" }}>{passwordErr}</div>
           </Form.Group>
 
           <Button className="update-button" variant="info" onClick={updateDetails}>Update</Button>

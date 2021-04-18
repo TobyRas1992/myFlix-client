@@ -13,37 +13,36 @@ function RegistrationView(props) {
   const [password, setPassword] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const [usernameErr, setUsernameErr] = useState({});
-  const [emailErr, setEmailErr] = useState({});
-  const [passwordErr, setPasswordErr] = useState({});
+  const [usernameErr, setUsernameErr] = useState('');
+  const [emailErr, setEmailErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
 
   const [loading, setLoading] = useState(false); // John: how does this loading work? 
 
   const formValidation = () => {
-    const usernameErr = {};
-    const passwordErr = {};
-    const emailErr = {};
-    let isValid = true;
 
     if (username.trim().length < 6) {
-      usernameErr.usernameShort = "Username must be at least 6 characters";
-      isValid = false;
+      usernameErr = "Username must be at least 6 characters";
+    } else {
+      setUsernameErr('');
     }
 
     if (!password || password.length < 5) {
-      passwordErr.passwordMissing = "Password must be at least 5 characters"
+      passwordErr = "Password must be at least 5 characters"
+    } else {
+      setPasswordErr('');
     }
 
     if (!email.includes(".") && !email.includes("@")) {
-      emailErr.emailNotEmail = "A valid email address is required";
+      emailErr = "A valid email address is required";
+    } else {
+      setEmailErr('');
     }
 
-    setUsernameErr(usernameErr);
-    setPasswordErr(passwordErr);
-    setEmailErr(emailErr);
-    return isValid;
+    return usernameErr || passwordErr || emailErr;
   }
-  const { handleReturnLogin } = props;
+
+  const { handleReturnLogin } = props; //John: what does this do?
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
@@ -64,6 +63,7 @@ function RegistrationView(props) {
           alert('New Account created - now log in')
         }).catch(() => {
           console.log('error registering the user')
+          setLoading(false);
         })
     }
   };
@@ -92,13 +92,9 @@ function RegistrationView(props) {
               placeholder="Username"
               onChange={e => setUsername(e.target.value)}
             />
-            {Object.keys(usernameErr).map((key) => {
-              return (
-                <div key={key} style={{ color: "red" }}>
-                  {usernameErr[key]}
-                </div>
-              );
-            })}
+            <div style={{ color: "red" }}>
+              {usernameErr}
+            </div>
           </Form.Group>
 
           <Form.Group controlId="formEmail">
@@ -108,13 +104,9 @@ function RegistrationView(props) {
               placeholder="Email"
               onChange={e => setEmail(e.target.value)}
             />
-            {Object.keys(emailErr).map((key) => {
-              return (
-                <div key={key} style={{ color: "red" }}>
-                  {emailErr[key]}
-                </div>
-              );
-            })}
+            <div style={{ color: "red" }}>
+              {emailErr}
+            </div>
             <Form.Text className="text-muted">We will never share your email with anyone else</Form.Text>
           </Form.Group>
 
@@ -134,13 +126,9 @@ function RegistrationView(props) {
               placeholder="Password"
               onChange={e => setPassword(e.target.value)}
             />
-            {Object.keys(passwordErr).map((key) => {
-              return (
-                <div key={key} style={{ color: "red" }}>
-                  {passwordErr[key]}
-                </div>
-              );
-            })}
+            <div style={{ color: "red" }}>
+              {passwordErr}
+            </div>
           </Form.Group>
 
           {!loading && <Button variant="info" type="submit" onClick={handleSubmitClick}>Sign Up</Button>}  {/* John: go over the logic for this */}
