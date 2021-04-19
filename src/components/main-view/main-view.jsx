@@ -1,29 +1,37 @@
 import React from 'react';
 import axios from 'axios';
 
-import { BrowserRouter as Router, Route } from "react-router-dom"; // Router implements state-based routing + route tells React the routes.
+import { connect } from 'react-redux';
 
-import RegistrationView from '../registration-view/registration-view';
-import LoginView from '../login-view/login-view';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+// #0
+import { setMovies } from '../../actions/actions';
+
+// we haven't written this one yet
+import MovieList from '../movies-list/movies-list';
+import { MovieView } from '../movie-view/movie-view';
+/* import { MovieCard } from '../movie-card/movie-card'; */
 import { GenreView } from "../genre-view/genre-view";
 import { DirectorView } from "../director-view/director-view";
+import LoginView from '../login-view/login-view';
+import RegistrationView from '../registration-view/registration-view';
 import { ProfileView } from "../profile-view/profile-view";
 import { UpdateView } from "../update-view/update-view";
-import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
 
-import { Row, Col, Container, Navbar, Nav, Jumbotron } from 'react-bootstrap';
+
+import { Row, Container, Navbar, Nav, Jumbotron } from 'react-bootstrap';
 
 
 import './main-view.scss';
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      movies: [],
-      selectedMovie: null,
+      /*       movies: [], */
+      /*       selectedMovie: null, */
       user: null,
       hasAccount: true
     };
@@ -34,11 +42,10 @@ export class MainView extends React.Component {
   // Gets movies from API
   getMovies(token) {
     axios.get('https://my-movie-overview.herokuapp.com/movies', {
-      headers: { Authorization: `Bearer ${token}` } // passes bearer authorization in header of HTTP request.
+      headers: { Authorization: `Bearer ${token}` }
     }).then(response => {
-      this.setState({
-        movies: response.data
-      });
+      // #1
+      this.props.setMovies(response.data);
     }).catch(function (error) {
       console.log(error);
     });
@@ -82,9 +89,9 @@ export class MainView extends React.Component {
     window.open('/', '_self');
   }
 
-  //Persisted authentication - keeps user logged in after successful onLoggedIn()
+  //Persisted authentication 
   componentDidMount() {
-    let accessToken = localStorage.getItem('token'); // get value of token from localStorage.
+    let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
         user: localStorage.getItem('user') // sets user state to user in localStorage.
@@ -94,7 +101,10 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user, hasAccount } = this.state;
+    // #2
+    let { movies } = this.props;
+    let { user } = this.state;
+    const { hasAccount } = this.state; //maybe delete?
 
     // on LoginView, when 'New User Sign Up' is clicked, goes to RegistrationView
     if (!hasAccount)
@@ -107,7 +117,7 @@ export class MainView extends React.Component {
     // if (!movies && !movies.length) return <div className="main-view" />;
 
     return (
-      <Router> {/* implements state-based routing */}
+      <Router>
         <React.Fragment>
           <header>
             <Navbar className="navbar" collapseOnSelect bg="dark" variant="dark" expand="lg">
@@ -128,7 +138,8 @@ export class MainView extends React.Component {
               <Route exact path="/" render={() => {
                 if (!user)
                   return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={this.handleToRegister} />;
-                return movies.map(m => <MovieCard key={m._id} movie={m} />)
+                /*  return movies.map(m => <MovieCard key={m._id} movie={m} />) */
+                return <MovieList movies={movies} />;
               }
               } />
 
@@ -166,3 +177,11 @@ export class MainView extends React.Component {
     );
   }
 }
+
+// #3
+let mapStateToProps = state => {
+  return { movies: state.movies }
+}
+
+// #4
+export default connect(mapStateToProps, { setMovies })(MainView);
