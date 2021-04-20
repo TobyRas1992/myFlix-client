@@ -10,7 +10,7 @@ This repo is for the client-side of my myFlix application.
 ## Screenshots
 
 ## Tech/framework used
-Built with
+**Built with**
 - React.js
 - Redux
 - React-Bootstrap
