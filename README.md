@@ -1,13 +1,13 @@
 # myFlix-client
 This repo is for the client-side of my myFlix application built using the MERN stack. 
 
-myFlix is an app that provides users with information on different films, directors, and genres from a movie database. 
+myFlix is an app that provides users with information on different films, directors, and genres from a movie database :popcorn: 
 Users can sign up, update their information, and add films to their list of favorites. 
 
 ## Motivation 
 I wanted to built a client-side app that worked together with a movie database that I have built using Node.js, Express, and MongoDB.
 
-## Screenshots
+## Demo
 
 ## Tech/framework used
 **Built with**
