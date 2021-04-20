@@ -16,7 +16,7 @@ Users can sign up, update their information, and add films to their list of favo
 **Built with**
 - React.js
 - Redux
-- React-Bootstrap
+- [React-Bootstrap](https://react-bootstrap.github.io/)
 
 ## Features
 
@@ -25,11 +25,16 @@ Users can sign up, update their information, and add films to their list of favo
 ## Installation 
 ### Install dependencies
 `npm install`
-
+### Run
+`parcel src/index.html`
+### In Browser
+`http://localhost:1234/`
 ## API Reference
 
-## Tests
-
 ## How to use?
+- Log in or register new user. 
+- After successful login/user registration, you will be forwarded to the main view, showing the full movie database. 
+- Each movie is clickable and will open a new view with the movie's information and buttons to show more info on its genre and director. 
+- 
 
 ## Credits
