@@ -45,7 +45,7 @@ class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     }).then(response => {
       // #1
-      this.props.setMovies(response.data);
+      this.props.setMovies(response.data); // movies passed into props. 
     }).catch(function (error) {
       console.log(error);
     });
@@ -178,10 +178,10 @@ class MainView extends React.Component {
   }
 }
 
-// #3
+// #3 gets state from store and passes it as props to components connected to the store. Thus, components access state as props and not directly. 
 let mapStateToProps = state => {
   return { movies: state.movies }
 }
 
-// #4
+// #4 connect component to store. mapStateToProps t
 export default connect(mapStateToProps, { setMovies })(MainView);
