@@ -23,7 +23,7 @@ I wanted to built a client-side app that worked together with a movie database t
 ### In Browser
 `http://localhost:1234/`
 ## API Reference
-
+[movie_api](https://github.com/TobyRas1992/movie_api)
 ## How to use?
 - Log in or register new user. 
 - After successful login/user registration, you will be forwarded to the main view, showing the full movie database. 
