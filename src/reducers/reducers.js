@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 
-import {SET_FILTER, SET_MOVIES, DEL_USER} from '../actions/actions';
+import {SET_FILTER, SET_MOVIES, SET_USER} from '../actions/actions';
 
 // Reducers
 // Each reducer takes a state + 1 action 
@@ -10,9 +10,9 @@ import {SET_FILTER, SET_MOVIES, DEL_USER} from '../actions/actions';
 // state set to empty string bc it will be either true or false. 
 function visibilityFilter(state = '', action) { // first line: reducer signature. State set to default ('') so reducer won't return what unconcerned actions pass into the function instead of state. 
   switch (action.type) {
-    case SET_FILTER: // if action concerns reducer, call reducer and change state
+    case SET_FILTER: 
       return action.value;
-    default: // if action doesn't concern reducer, return given state. 
+    default: // if action doesn't concern reducer, return existing state unchanged. 
       return state;
   }
 }
@@ -28,10 +28,9 @@ function movies(state = [], action) {
   }
 }
 
-// John: I'm assuming the state for this reducer should be set to an array, since it will be holding a user object? 
-function users(state = {}, action) {
+function user(state = {}, action) {
   switch (action.type) {
-    case DEL_USER:
+    case SET_USER:
       return action.value;
     default:
     return state;
@@ -43,7 +42,7 @@ function users(state = {}, action) {
 const moviesApp = combineReducers({
   visibilityFilter,
   movies,
-  users
+  user
 });
 
 // presents entire movie app 

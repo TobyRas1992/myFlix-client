@@ -1,6 +1,6 @@
 export const SET_MOVIES = 'SET_MOVIES'; // variable set equal to string version of variable (action type)
 export const SET_FILTER = 'SET_FILTER';
-export const DEL_USER = 'DEL_USER';
+export const DEL_USER = 'SET_USER';
 
 
 // Action Creators - pure function that returns action itself that update state
@@ -21,10 +21,9 @@ export function setFilter(value) {
   }
 }
 
-// Deletes user
-export function delUser(value) {
+export function setUser(value) {
   return {
-    type: DEL_USER,
+    type: SET_USER,
     value
   }
 }
