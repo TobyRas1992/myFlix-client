@@ -26,7 +26,7 @@ function MoviesList(props) {
       <Row className='justify-content-center'>
         <div className='col-2'></div>
         <div className='col-6'>
-          <VisibilityFilterInput visibilityFilter={visibilityFilter} />
+          <VisibilityFilterInput visibilityFilter={visibilityFilter} /> {/* John: this is how I see other students implement VisibilityFilterInput, but I don't see how this renders a form input for the user? */}
         </div>
         <div className="col-2"></div>
         {filteredMovies.map(m => <MovieCard key={m._id} movie={m} />)}
