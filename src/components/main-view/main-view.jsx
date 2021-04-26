@@ -61,10 +61,11 @@ class MainView extends React.Component {
   // Updates user in state on successful login
   onLoggedIn(authData) { // takes user + token as argument in authData.
     console.log(authData);
-    this.props.setUser(authData.user.Username);
+    // this.props.setUser(authData.user.Username);
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
+    this.props.setUser(authData.user.Username);
   }
 
   //Logs user out
@@ -79,7 +80,7 @@ class MainView extends React.Component {
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
-      this.setUser(localStorage.getItem('user'));
+      // this.props.setUser(localStorage.getItem('user'));
       this.getMovies(accessToken);
     }
   }
@@ -117,7 +118,6 @@ class MainView extends React.Component {
           </header>
           <Container className="my-3">
             <Row className="main-view justify-content-md-center">
-
               <Route exact path="/" render={() => {
                 if (!user)
                   return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={this.handleToRegister} />;
@@ -162,9 +162,11 @@ class MainView extends React.Component {
 }
 
 // #3 gets state from store and passes it as props to components connected to the store. Thus, components access state as props and not directly. 
-let mapStateToProps = state => {
+const mapStateToProps = state => {
   return { movies: state.movies, user: state.user }
 }
 
 // #4 connect component to store. John: explain to me how connect() works. 
+// connect () accepts 4 arguments and returns a function. 
+// mapStateToProps allows MainView to subscribe to store updates. Any time store updates, the function is called. mapStateToProps takes the store state as argument and returns the new props for the component. 
 export default connect(mapStateToProps, { setMovies, setUser })(MainView);

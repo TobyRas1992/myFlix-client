@@ -1,14 +1,15 @@
 import {combineReducers} from 'redux';
 
-import {SET_FILTER, SET_MOVIES, SET_USER} from '../actions/actions';
+import {SET_FILTER, SET_MOVIES, SET_USER, DEL_USER} from '../actions/actions';
 
 // Reducers
-// Each reducer takes a state + 1 action 
+// Each reducer takes a state + an action 
 // If action falls within reducers realm of concern -> state is changed
 
-// John: why use default state in reducer ""?
-// state set to empty string bc it will be either true or false. 
-function visibilityFilter(state = '', action) { // first line: reducer signature. State set to default ('') so reducer won't return what unconcerned actions pass into the function instead of state. 
+
+
+
+function visibilityFilter(state = '', action) {
   switch (action.type) {
     case SET_FILTER: 
       return action.value;
@@ -17,7 +18,6 @@ function visibilityFilter(state = '', action) { // first line: reducer signature
   }
 }
 
-// info: this reducer is general and deals with movies (deleting, adding etc.). Hence why the name is more general than the ones for the action creators
 // state initialized as empty array bc it needs to contain movie objects when they come in. 
 function movies(state = [], action) {
   switch (action.type) {
@@ -28,17 +28,18 @@ function movies(state = [], action) {
   }
 }
 
-function user(state = {}, action) {
+function user(state = '', action) {
   switch (action.type) {
     case SET_USER:
       return action.value;
+    case DEL_USER:
+      return action.value; // is this the correct place for this action call, or should I put it in a separate reducer?
     default:
-    return state;
+      return state;
   }
 }
 
 // combined reducer: elegantly groups together reducers and pass them to the state they are concerned with. 
-// each reducer has its own little realm build with a previous state and an action (both passed as params) and it decides what the next state is going to look like. 
 const moviesApp = combineReducers({
   visibilityFilter,
   movies,

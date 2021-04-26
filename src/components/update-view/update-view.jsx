@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Container, Button } from "react-bootstrap";
 import axios from "axios";
-
+import { delUser } from '../../actions/actions';
 import "./update-view.scss";
 
 export function UpdateView() {
@@ -13,6 +13,8 @@ export function UpdateView() {
   const [usernameErr, setUsernameErr] = useState('');
   const [passwordErr, setPasswordErr] = useState('');
   const [emailErr, setEmailErr] = useState('');
+
+
 
   // Validates input data
   const formValidation = () => {
@@ -73,7 +75,8 @@ export function UpdateView() {
       }).then(() => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        window.open("/", "_self");
+/*         this.props.delUser; Find a way to get this to work. 
+ */        window.open("/", "_self");
         alert("Your account has been deleted.");
       }).catch(() => {
         console.log(response);

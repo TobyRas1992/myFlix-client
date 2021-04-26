@@ -6,8 +6,9 @@ import { MovieCard } from '../movie-card/movie-card';
 import { Row } from 'react-bootstrap';
 
 const mapStateToProps = state => {
-  const { visibilityFilter } = state;
-  return visibilityFilter;
+  return {
+    visibilityFilter: state.visibilityFilter
+  };
 };
 
 function MoviesList(props) {
