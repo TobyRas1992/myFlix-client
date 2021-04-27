@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { setUser } from '../../actions/actions';
 
 import "./profile-view.scss";
 

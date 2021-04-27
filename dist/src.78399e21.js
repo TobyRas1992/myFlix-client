@@ -54339,6 +54339,8 @@ var _reactRouterDom = require("react-router-dom");
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _actions = require("../../actions/actions");
+
 require("./profile-view.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -54506,7 +54508,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../node_modules/axios/index.js","./profile-view.scss":"components/profile-view/profile-view.scss"}],"components/update-view/update-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","axios":"../node_modules/axios/index.js","../../actions/actions":"actions/actions.js","./profile-view.scss":"components/profile-view/profile-view.scss"}],"components/update-view/update-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
