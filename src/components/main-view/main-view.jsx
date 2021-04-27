@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from 'react-redux';
 
 
-// #0
-import { setMovies, setUser } from '../../actions/actions';
+// #0 imports actions to modify store 
+import { setMovies, setUser, loginUser, logoutUser } from '../../actions/actions';
 
 import MovieList from '../movies-list/movies-list';
 
@@ -27,7 +27,7 @@ class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      hasAccount: true
+      // hasAccount: true
     };
   }
 
