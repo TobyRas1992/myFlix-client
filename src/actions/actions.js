@@ -2,6 +2,7 @@ export const SET_MOVIES = 'SET_MOVIES'; // variable set equal to string version 
 export const SET_FILTER = 'SET_FILTER';
 export const SET_USER = 'SET_USER';
 export const DEL_USER = 'DEL_USER';
+export const UPDATE_USER = 'UPDATE_USER';
 
 
 // Action Creators - pure function that returns action itself that update state
@@ -32,6 +33,13 @@ export function setUser(value) {
 export function delUser(value) {
   return {
     type: DEL_USER,
+    value
+  }
+}
+
+export function updateUser(value) {
+  return {
+    type: UPDATE_USER,
     value
   }
 }
