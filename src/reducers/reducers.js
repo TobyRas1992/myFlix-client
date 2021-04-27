@@ -49,7 +49,7 @@ function account(state= '', action) {
   }
 }
 
-// combined reducer: elegantly groups together reducers and pass them to the state they are concerned with. 
+// combined reducer: is a helper function that creates an object with different reducer functions a its values. This single function can then be passed to createStore(), calling every child reducer and gathering their results into a single state object. The state produced by combineReducers() namespaces the states of each reducer under their keys as passed to combineReducers().
 const moviesApp = combineReducers({
   visibilityFilter,
   movies,
