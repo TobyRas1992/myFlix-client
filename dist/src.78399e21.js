@@ -38077,20 +38077,34 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setMovies = setMovies;
 exports.setFilter = setFilter;
+exports.addFavoriteMovie = addFavoriteMovie;
+exports.delFavoriteMovie = delFavoriteMovie;
 exports.setUser = setUser;
+exports.logoutUser = logoutUser;
+exports.loginUser = loginUser;
 exports.delUser = delUser;
-exports.DEL_USER = exports.SET_USER = exports.SET_FILTER = exports.SET_MOVIES = void 0;
-var SET_MOVIES = 'SET_MOVIES'; // variable set equal to string version of variable (action type)
-
+exports.updateUser = updateUser;
+exports.DEL_FAVORITE = exports.ADD_FAVORITE = exports.LOGIN_USER = exports.LOGOUT_USER = exports.UPDATE_USER = exports.DEL_USER = exports.SET_USER = exports.SET_FILTER = exports.SET_MOVIES = void 0;
+var SET_MOVIES = 'SET_MOVIES';
 exports.SET_MOVIES = SET_MOVIES;
 var SET_FILTER = 'SET_FILTER';
 exports.SET_FILTER = SET_FILTER;
 var SET_USER = 'SET_USER';
 exports.SET_USER = SET_USER;
-var DEL_USER = 'DEL_USER'; // Action Creators - pure function that returns action itself that update state
+var DEL_USER = 'DEL_USER';
+exports.DEL_USER = DEL_USER;
+var UPDATE_USER = 'UPDATE_USER';
+exports.UPDATE_USER = UPDATE_USER;
+var LOGOUT_USER = 'LOGOUT_USER';
+exports.LOGOUT_USER = LOGOUT_USER;
+var LOGIN_USER = 'LOGIN_USER';
+exports.LOGIN_USER = LOGIN_USER;
+var ADD_FAVORITE = 'ADD_FAVORITE';
+exports.ADD_FAVORITE = ADD_FAVORITE;
+var DEL_FAVORITE = 'DEL_FAVORITE'; // Action Creators - pure function that returns action itself that update state
 // Initialize movie list with movies
 
-exports.DEL_USER = DEL_USER;
+exports.DEL_FAVORITE = DEL_FAVORITE;
 
 function setMovies(value) {
   return {
@@ -38106,18 +38120,60 @@ function setFilter(value) {
     type: SET_FILTER,
     value: value
   };
-}
+} // adds favorite movie to user's favorite list
+
+
+function addFavoriteMovie(value) {
+  return {
+    type: ADD_FAVORITE,
+    value: value
+  };
+} // deletes favorite movie to user's favorite list
+
+
+function delFavoriteMovie(value) {
+  return {
+    type: DEL_FAVORITE,
+    value: value
+  };
+} // initializes user with user object
+
 
 function setUser(value) {
   return {
     type: SET_USER,
     value: value
   };
-}
+} // logs out user
+
+
+function logoutUser(value) {
+  return {
+    type: LOGOUT_USER,
+    value: value
+  };
+} // logs in user
+
+
+function loginUser(value) {
+  return {
+    type: LOGIN_USER,
+    value: value
+  };
+} // deletes user from store
+
 
 function delUser(value) {
   return {
     type: DEL_USER,
+    value: value
+  };
+} // updates user in store
+
+
+function updateUser(value) {
+  return {
+    type: UPDATE_USER,
     value: value
   };
 }
@@ -54973,9 +55029,7 @@ var _redux = require("redux");
 
 var _actions = require("../actions/actions");
 
-// Reducers
-// Each reducer takes a state + an action 
-// If action falls within reducers realm of concern -> state is changed
+// we need to apply an initial state for when the reducer is called for the first time. Afterwards, the reducer will use previousState. 
 function visibilityFilter() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -54985,11 +55039,9 @@ function visibilityFilter() {
       return action.value;
 
     default:
-      // if action doesn't concern reducer, return existing state unchanged. 
       return state;
   }
-} // state initialized as empty array bc it needs to contain movie objects when they come in. 
-
+}
 
 function movies() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -55013,14 +55065,40 @@ function user() {
     case _actions.SET_USER:
       return action.value;
 
+    case _actions.UPDATE_USER:
+      return action.value;
+
     case _actions.DEL_USER:
       return action.value;
     // is this the correct place for this action call, or should I put it in a separate reducer?
 
+    case _actions.ADD_FAVORITE:
+      return action.value;
+
+    case _actions.DEL_FAVORITE:
+      return action.value;
+
     default:
       return state;
   }
-} // combined reducer: elegantly groups together reducers and pass them to the state they are concerned with. 
+} // Note: figure out the logic for handling logging in and out. 
+
+
+function account() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions.LOGIN_USER:
+      return action.value;
+
+    case _actions.LOGOUT_USER:
+      return action.value;
+
+    default:
+      return state;
+  }
+} // combined reducer: is a helper function that creates an object with different reducer functions a its values. This single function can then be passed to createStore(), calling every child reducer and gathering their results into a single state object. The state produced by combineReducers() namespaces the states of each reducer under their keys as passed to combineReducers().
 
 
 var moviesApp = (0, _redux.combineReducers)({
@@ -55137,7 +55215,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55957" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58632" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
