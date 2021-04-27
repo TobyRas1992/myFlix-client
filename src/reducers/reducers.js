@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 
-import {SET_FILTER, SET_MOVIES, SET_USER, DEL_USER, ADD_FAVORITE, DEL_FAVORITE, UPDATE_USER, LOGOUT_USER} from '../actions/actions';
+import {SET_FILTER, SET_MOVIES, SET_USER, DEL_USER, ADD_FAVORITE, DEL_FAVORITE, UPDATE_USER, LOGOUT_USER, LOGIN_USER} from '../actions/actions';
 
-
+// we need to apply an initial state for when the reducer is called for the first time. Afterwards, the reducer will use previousState. 
 function visibilityFilter(state = '', action) {
   switch (action.type) {
     case SET_FILTER: 
@@ -26,8 +26,6 @@ function user(state = '', action) {
     case SET_USER:
       return action.value;
     case UPDATE_USER:
-      return action.value;
-    case LOGOUT_USER:
       return action.value;
     case DEL_USER:
       return action.value; // is this the correct place for this action call, or should I put it in a separate reducer?

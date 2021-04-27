@@ -4,6 +4,7 @@ export const SET_USER = 'SET_USER';
 export const DEL_USER = 'DEL_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const LOGIN_USER = 'LOGIN_USER';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const DEL_FAVORITE = 'DEL_FAVORITE';
 export const UPDATE_USER = 'UPDATE_USER';
@@ -57,6 +58,13 @@ export function logoutUser(value) {
     value
   }
 }
+
+// logs in user
+export function loginUser(value) {
+  return {
+    type: LOGIN_USER,
+    value
+  }
 
 // deletes user from store
 export function delUser(value) {
