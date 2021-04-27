@@ -27,7 +27,7 @@ class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      // hasAccount: true
+      hasAccount: true
     };
   }
 
