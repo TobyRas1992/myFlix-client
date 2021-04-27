@@ -38,11 +38,23 @@ function user(state = '', action) {
   }
 }
 
+function account(state= '', action) {
+  switch (action.type) {
+    case LOGIN_USER:
+      return action.value;
+    case LOGOUT_USER:
+      return action.value;
+    default: 
+      return state;
+  }
+}
+
 // combined reducer: elegantly groups together reducers and pass them to the state they are concerned with. 
 const moviesApp = combineReducers({
   visibilityFilter,
   movies,
-  user
+  user,
+  account
 });
 
 // presents entire movie app 
