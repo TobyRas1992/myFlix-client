@@ -7,7 +7,7 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const DEL_FAVORITE = 'DEL_FAVORITE';
-export const UPDATE_USER = 'UPDATE_USER';
+
 
 
 // Action Creators - pure function that returns action itself that update state
@@ -65,7 +65,7 @@ export function loginUser(value) {
     type: LOGIN_USER,
     value
   }
-
+}
 // deletes user from store
 export function delUser(value) {
   return {

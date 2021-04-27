@@ -38,6 +38,7 @@ function user(state = '', action) {
   }
 }
 
+// Note: figure out the logic for handling logging in and out. 
 function account(state= '', action) {
   switch (action.type) {
     case LOGIN_USER:
@@ -53,8 +54,7 @@ function account(state= '', action) {
 const moviesApp = combineReducers({
   visibilityFilter,
   movies,
-  user,
-  account
+  user
 });
 
 // presents entire movie app 
