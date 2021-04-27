@@ -1,12 +1,6 @@
 import {combineReducers} from 'redux';
 
-import {SET_FILTER, SET_MOVIES, SET_USER, DEL_USER} from '../actions/actions';
-
-// Reducers
-// Each reducer takes a state + an action 
-// If action falls within reducers realm of concern -> state is changed
-
-
+import {SET_FILTER, SET_MOVIES, SET_USER, DEL_USER, ADD_FAVORITE, DEL_FAVORITE, UPDATE_USER, LOGOUT_USER} from '../actions/actions';
 
 
 function visibilityFilter(state = '', action) {

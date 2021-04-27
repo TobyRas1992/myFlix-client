@@ -42,7 +42,7 @@ export function delFavoriteMovie(value) {
   }
 }
 
-// loads user into store
+// initializes user with user object
 export function setUser(value) {
   return {
     type: SET_USER,
