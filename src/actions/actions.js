@@ -1,7 +1,11 @@
-export const SET_MOVIES = 'SET_MOVIES'; // variable set equal to string version of variable (action type)
+export const SET_MOVIES = 'SET_MOVIES';
 export const SET_FILTER = 'SET_FILTER';
 export const SET_USER = 'SET_USER';
 export const DEL_USER = 'DEL_USER';
+export const UPDATE_USER = 'UPDATE_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const ADD_FAVORITE = 'ADD_FAVORITE';
+export const DEL_FAVORITE = 'DEL_FAVORITE';
 export const UPDATE_USER = 'UPDATE_USER';
 
 
@@ -23,6 +27,22 @@ export function setFilter(value) {
   }
 }
 
+// adds favorite movie to user's favorite list
+export function addFavoriteMovie(value) {
+  return {
+    type: ADD_FAVORITE,
+    value
+  }
+}
+// deletes favorite movie to user's favorite list
+export function delFavoriteMovie(value) {
+  return {
+    type: DEL_FAVORITE,
+    value
+  }
+}
+
+// loads user into store
 export function setUser(value) {
   return {
     type: SET_USER,
@@ -30,6 +50,15 @@ export function setUser(value) {
   }
 }
 
+// logs out user
+export function logoutUser(value) {
+  return {
+    type: LOGOUT_USER,
+    value
+  }
+}
+
+// deletes user from store
 export function delUser(value) {
   return {
     type: DEL_USER,
@@ -37,6 +66,7 @@ export function delUser(value) {
   }
 }
 
+// updates user in store
 export function updateUser(value) {
   return {
     type: UPDATE_USER,
