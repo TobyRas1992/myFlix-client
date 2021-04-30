@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Link, BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from 'react-redux';
 
 
@@ -14,11 +14,11 @@ import { GenreView } from "../genre-view/genre-view";
 import { DirectorView } from "../director-view/director-view";
 import LoginView from '../login-view/login-view';
 import RegistrationView from '../registration-view/registration-view';
-import { ProfileView } from "../profile-view/profile-view";
+import ProfileView from "../profile-view/profile-view";
 import { UpdateView } from "../update-view/update-view";
 
 
-import { Row, Container, Navbar, Nav, Jumbotron } from 'react-bootstrap';
+import { Row, Container, Navbar, Nav, Jumbotron, Button } from 'react-bootstrap';
 
 import './main-view.scss';
 
@@ -65,7 +65,7 @@ class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
-    this.props.setUser(authData.user.Username);
+    this.props.setUser(authData.user);
   }
 
   //Logs user out
@@ -73,6 +73,7 @@ class MainView extends React.Component {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     console.log('logged out successfully');
+    this.props.setUser(null); //John: correct method for setting user state in redux to empty? 
     window.open('/', '_self');
   }
 
@@ -109,9 +110,9 @@ class MainView extends React.Component {
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                  <Nav.Link href="/">Home</Nav.Link> {/* maybe change this to link bc Andy had to do this later? */}
-                  <Nav.Link href="/profile">Profile</Nav.Link>
-                  <Nav.Link onClick={() => this.handleLogOut()}>LogOut</Nav.Link>
+                  <Link id="homeLink" to="/">Home</Link> {/* maybe change this to link bc Andy had to do this later? */}
+                  <Link id="profileLink" to="/profile">Profile</Link>
+                  <Button variant="outline-light" onClick={() => this.handleLogOut()}>LogOut</Button>
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
@@ -141,7 +142,7 @@ class MainView extends React.Component {
                 }
                 } />
 
-              <Route path="/profile" render={() => <ProfileView user={user} movies={movies} />} />
+              <Route path="/profile" render={() => <ProfileView movies={movies} />} />
 
               <Route path='/update' render={() => <UpdateView />} />
 
