@@ -42,8 +42,6 @@ function RegistrationView(props) {
     return usernameErr || passwordErr || emailErr;
   }
 
-  const { handleReturnLogin } = props; //John: what does this do?
-
   const handleSubmitClick = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -137,9 +135,7 @@ function RegistrationView(props) {
         </Form>
         <small>
           Already have an account?
-        <span onClick={handleReturnLogin} className="register text-danger ml-2ak">
-            Return to Log In
-        </span>
+          <Link to="/">Return to Log In</Link>
         </small>
       </Container>
     </React.Fragment>

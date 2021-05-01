@@ -23,7 +23,8 @@ class ProfileView extends React.Component {
       (response) => {
         console.log(response);
         alert(`${movie.Title} was deleted from list of favorite movies!`);
-        window.open("/profile", "_self");
+        // window.open("/profile", "_self");
+        this.componentDidMount();
       }
     ).catch(function (error) {
       console.log(error);

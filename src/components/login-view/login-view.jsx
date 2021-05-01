@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button, Navbar } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 import './login-view.scss';
 
@@ -42,7 +43,7 @@ function LoginView(props) {
           Login
     </Button> {' '}
         <small>Not a member yet?</small>
-        <span onClick={onRegister}>Sign up for free</span>
+        <Link to="/register">Sign up for free</Link>
       </Form>
     </React.Fragment>
   );

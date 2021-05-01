@@ -54001,6 +54001,8 @@ var _reactBootstrap = require("react-bootstrap");
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _reactRouterDom = require("react-router-dom");
+
 require("./login-view.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -54078,8 +54080,8 @@ function LoginView(props) {
     variant: "primary",
     type: "submit",
     onClick: handleSubmit
-  }, "Login"), " ", ' ', /*#__PURE__*/_react.default.createElement("small", null, "Not a member yet?"), /*#__PURE__*/_react.default.createElement("span", {
-    onClick: onRegister
+  }, "Login"), " ", ' ', /*#__PURE__*/_react.default.createElement("small", null, "Not a member yet?"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/register"
   }, "Sign up for free")));
 }
 
@@ -54089,7 +54091,7 @@ LoginView.propTypes = {
 };
 var _default = LoginView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","axios":"../node_modules/axios/index.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./login-view.scss":"components/login-view/login-view.scss"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -54198,8 +54200,6 @@ function RegistrationView(props) {
     return usernameErr || passwordErr || emailErr;
   };
 
-  var handleReturnLogin = props.handleReturnLogin; //John: what does this do?
-
   var handleSubmitClick = function handleSubmitClick(e) {
     e.preventDefault();
     setLoading(true);
@@ -54294,9 +54294,8 @@ function RegistrationView(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Spinner, {
     animation: "border",
     variant: "danger"
-  }))), /*#__PURE__*/_react.default.createElement("small", null, "Already have an account?", /*#__PURE__*/_react.default.createElement("span", {
-    onClick: handleReturnLogin,
-    className: "register text-danger ml-2ak"
+  }))), /*#__PURE__*/_react.default.createElement("small", null, "Already have an account?", /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/"
   }, "Return to Log In"))));
 }
 
@@ -54380,6 +54379,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "removeFavorite",
     value: function removeFavorite(movie) {
+      var _this = this;
+
       // ask John if Redux will be used for this. 
       var token = localStorage.getItem("token");
       var user = localStorage.getItem("user");
@@ -54390,8 +54391,9 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (response) {
         console.log(response);
-        alert("".concat(movie.Title, " was deleted from list of favorite movies!"));
-        window.open("/profile", "_self");
+        alert("".concat(movie.Title, " was deleted from list of favorite movies!")); // window.open("/profile", "_self");
+
+        _this.componentDidMount();
       }).catch(function (error) {
         console.log(error);
       });
@@ -54399,10 +54401,10 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       var userFavoriteMoviesFullDetailsArray = this.props.movies.filter(function (movie) {
-        return _this.props.user.FavoriteMovies.includes(movie._id);
+        return _this2.props.user.FavoriteMovies.includes(movie._id);
       });
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement("h2", {
         className: "text-center mb-4 white-words"
@@ -54444,7 +54446,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           variant: "danger",
           size: "sm",
           onClick: function onClick() {
-            return _this.removeFavorite(movie);
+            return _this2.removeFavorite(movie);
           }
         }, "Remove")));
       })));
@@ -54749,8 +54751,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var MainView = /*#__PURE__*/function (_React$Component) {
   _inherits(MainView, _React$Component);
 
@@ -54762,19 +54762,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MainView);
 
     _this = _super.call(this);
-
-    _defineProperty(_assertThisInitialized(_this), "handleToRegister", function () {
-      _this.setState({
-        hasAccount: false
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "handleReturnLogin", function () {
-      _this.setState({
-        hasAccount: true
-      });
-    });
-
     _this.state = {
       hasAccount: true
     };
@@ -54798,12 +54785,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         console.log(error);
       });
     } // FUNCTIONS
-    // Handler to navigate to RegistrationView from LoginView 
+    // Updates user in state on successful login
 
   }, {
     key: "onLoggedIn",
-    value: // Updates user in state on successful login
-    function onLoggedIn(authData) {
+    value: function onLoggedIn(authData) {
       // takes user + token as argument in authData.
       console.log(authData); // this.props.setUser(authData.user.Username);
 
@@ -54830,8 +54816,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var accessToken = localStorage.getItem('token');
 
       if (accessToken !== null) {
-        // this.props.setUser(localStorage.getItem('user'));
         this.getMovies(accessToken);
+
+        /*#__PURE__*/
+        _react.default.createElement(MainView, null);
       }
     }
   }, {
@@ -54890,8 +54878,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           if (!user) return /*#__PURE__*/_react.default.createElement(_loginView.default, {
             onLoggedIn: function onLoggedIn(user) {
               return _this3.onLoggedIn(user);
-            },
-            onRegister: _this3.handleToRegister
+            }
           });
           return /*#__PURE__*/_react.default.createElement(_moviesList.default, {
             movies: movies
@@ -54900,9 +54887,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
         path: "/register",
         render: function render() {
-          return /*#__PURE__*/_react.default.createElement(_registrationView.default, {
-            handleReturnLogin: _this3.handleReturnLogin
-          });
+          return /*#__PURE__*/_react.default.createElement(_registrationView.default, null);
         }
       }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
         path: "/movies/:movieId",

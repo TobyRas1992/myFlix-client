@@ -45,19 +45,6 @@ class MainView extends React.Component {
 
   // FUNCTIONS
 
-  // Handler to navigate to RegistrationView from LoginView 
-  handleToRegister = () => {
-    this.setState({
-      hasAccount: false
-    });
-  }
-  //Handler to return to LoginView from RegistrationView
-  handleReturnLogin = () => {
-    this.setState({
-      hasAccount: true
-    });
-  }
-
   // Updates user in state on successful login
   onLoggedIn(authData) { // takes user + token as argument in authData.
     console.log(authData);
@@ -81,8 +68,8 @@ class MainView extends React.Component {
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
-      // this.props.setUser(localStorage.getItem('user'));
       this.getMovies(accessToken);
+      <MainView />
     }
   }
 
@@ -121,12 +108,12 @@ class MainView extends React.Component {
             <Row className="main-view justify-content-md-center">
               <Route exact path="/" render={() => {
                 if (!user)
-                  return <LoginView onLoggedIn={user => this.onLoggedIn(user)} onRegister={this.handleToRegister} />;
+                  return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
                 return <MovieList movies={movies} />;
               }
               } />
 
-              <Route path="/register" render={() => <RegistrationView handleReturnLogin={this.handleReturnLogin} />} />
+              <Route path="/register" render={() => <RegistrationView />} />
 
               <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
 
