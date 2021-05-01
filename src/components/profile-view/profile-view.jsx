@@ -30,63 +30,61 @@ class ProfileView extends React.Component {
     });
   }
 
-  removeFavorite(movie) {
-  }
-
   render() {
-    const favoriteList = this.props.user.FavoriteMovies. // John: is this a correct filtering?
+    const userFavoriteMoviesFullDetailsArray = this.props.movies.filter(movie => this.props.user.FavoriteMovies.includes(movie._id));
 
-      return(<React.Fragment>
-        <Container>
-          <h2 className='text-center mb-4 white-words'>Profile Details</h2>
 
-          <Card className="profile-view">
-            <Card.Body>
-              <Card.Text>Username: {this.props.user.Username}</Card.Text>
-              <Card.Text>Email: {this.props.user.Email}</Card.Text>
-              <Card.Text>Birthday: {this.props.user.Birthday}</Card.Text>
+    return (<React.Fragment>
+      <Container>
+        <h2 className='text-center mb-4 white-words'>Profile Details</h2>
 
-              <Link to={`/update`}>
-                <div className="center-btn">
-                  <small className="register text-danger ml-2">Update details</small>
-                </div>
-              </Link>
+        <Card className="profile-view">
+          <Card.Body>
+            <Card.Text>Username: {this.props.user.Username}</Card.Text>
+            <Card.Text>Email: {this.props.user.Email}</Card.Text>
+            <Card.Text>Birthday: {this.props.user.Birthday}</Card.Text>
 
-              <Link to={`/`}>
-                <div className="center-btn">
-                  <Button className="return-button" variant="info">Return to Movie List</Button>
-                </div>
-              </Link>
-            </Card.Body>
-          </Card>
-        </Container>
+            <Link to={`/update`}>
+              <div className="center-btn">
+                <small className="register text-danger ml-2">Update details</small>
+              </div>
+            </Link>
 
-        <Container className="my-3">
-          <h2 className="text-center mb-4 white-words">Favorite Movies</h2>
-        </Container>
-        <Container className='d-flex row my-3 favorites'>
-          {favoriteList.map(
-            (movie) => {
-              return (
-                <div key={movie._id}>
-                  <Card style={{ width: '10rem' }} className='favorite-card'>
-                    <Link>
-                      <Card.Img
-                        className='movie-card-link'
-                        variant='top'
-                        src={movie.ImagePath} />
-                    </Link>
-                    <Button className='remove-favorite'
-                      variant='danger'
-                      size='sm'
-                      onClick={() => this.removeFavorite(movie)}>Remove</Button>
-                  </Card>
-                </div>
-              )
-            }
-          )}
-        </Container>
-      </React.Fragment >);
+            <Link to={`/`}>
+              <div className="center-btn">
+                <Button className="return-button" variant="info">Return to Movie List</Button>
+              </div>
+            </Link>
+          </Card.Body>
+        </Card>
+      </Container>
+
+      <Container className="my-3">
+        <h2 className="text-center mb-4 white-words">Favorite Movies</h2>
+      </Container>
+      <Container className='d-flex row my-3 favorites'>
+        {userFavoriteMoviesFullDetailsArray.map(
+          (movie) => {
+            return (
+              <div key={movie._id}>
+                <Card style={{ width: '10rem' }} className='favorite-card'>
+                  <Link>
+                    <Card.Img
+                      className='movie-card-link'
+                      variant='top'
+                      src={movie.ImagePath} />
+                  </Link>
+                  <Button className='remove-favorite'
+                    variant='danger'
+                    size='sm'
+                    onClick={() => this.removeFavorite(movie)}>Remove</Button>
+                </Card>
+              </div>
+            )
+          }
+        )}
+      </Container>
+    </React.Fragment >);
   }
 }
 

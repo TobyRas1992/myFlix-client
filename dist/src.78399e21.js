@@ -53752,6 +53752,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (response) {
         console.log(response);
+        alert('Movie has been added to list of favorites!');
       }).catch(function (error) {
         console.log(error);
       });
@@ -54378,14 +54379,32 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "removeFavorite",
-    value: function removeFavorite(movie) {}
+    value: function removeFavorite(movie) {
+      // ask John if Redux will be used for this. 
+      var token = localStorage.getItem("token");
+      var user = localStorage.getItem("user");
+
+      _axios.default.delete("https://my-movie-overview.herokuapp.com/users/".concat(user, "/").concat(movie._id), {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        console.log(response);
+        alert("".concat(movie.Title, " was deleted from list of favorite movies!"));
+        window.open("/profile", "_self");
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
   }, {
     key: "render",
     value: function render() {
       var _this = this;
 
-      var favoriteList = this.props.user.FavoriteMovies. // John: is this a correct filtering?
-      return( /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement("h2", {
+      var userFavoriteMoviesFullDetailsArray = this.props.movies.filter(function (movie) {
+        return _this.props.user.FavoriteMovies.includes(movie._id);
+      });
+      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement("h2", {
         className: "text-center mb-4 white-words"
       }, "Profile Details"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
         className: "profile-view"
@@ -54408,7 +54427,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "text-center mb-4 white-words"
       }, "Favorite Movies")), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, {
         className: "d-flex row my-3 favorites"
-      }, favoriteList.map(function (movie) {
+      }, userFavoriteMoviesFullDetailsArray.map(function (movie) {
         return /*#__PURE__*/_react.default.createElement("div", {
           key: movie._id
         }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
@@ -54428,7 +54447,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
             return _this.removeFavorite(movie);
           }
         }, "Remove")));
-      }))));
+      })));
     }
   }]);
 
@@ -55149,7 +55168,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52124" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57669" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
