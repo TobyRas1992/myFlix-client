@@ -55019,23 +55019,6 @@ function user() {
     default:
       return state;
   }
-} // Note: figure out the logic for handling logging in and out. 
-
-
-function account() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case _actions.LOGIN_USER:
-      return action.value;
-
-    case _actions.LOGOUT_USER:
-      return action.value;
-
-    default:
-      return state;
-  }
 } // combined reducer: is a helper function that creates an object with different reducer functions a its values. This single function can then be passed to createStore(), calling every child reducer and gathering their results into a single state object. The state produced by combineReducers() namespaces the states of each reducer under their keys as passed to combineReducers().
 
 

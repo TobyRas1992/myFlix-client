@@ -21,23 +21,12 @@ function movies(state = [], action) {
   }
 }
 
+
 function user(state = null, action) {
   switch (action.type) {
     case SET_USER:
       return action.value;
     default:
-      return state;
-  }
-}
-
-// Note: figure out the logic for handling logging in and out. 
-function account(state= '', action) {
-  switch (action.type) {
-    case LOGIN_USER:
-      return action.value;
-    case LOGOUT_USER:
-      return action.value;
-    default: 
       return state;
   }
 }
