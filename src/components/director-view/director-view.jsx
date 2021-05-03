@@ -21,7 +21,7 @@ export function DirectorView(props) {
             <Card.Subtitle className="mb-2 text-muted">{director.Birth}-{director.Death}</Card.Subtitle>
             <Card.Text>{director.Bio}</Card.Text>
             <div className="center-btn">
-              <Button className="return-button" variant="info" onClick={() => history.goBack()}>Return to movie</Button>
+              <Button className="return-button" variant="info" onClick={() => history.goBack()}>Return to movie</Button> {/* John: how does history work here? */}
             </div>
           </Card.Body>
         </Card>

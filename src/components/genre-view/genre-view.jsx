@@ -10,7 +10,7 @@ export function GenreView(props) {
   const { genre, movies } = props;
   if (!genre) return null;
 
-  const history = useHistory();
+  const history = useHistory(); // John: how does useHistory work?  I've read the docs, but it's pretty dense. 
 
   return (
     <React.Fragment>
@@ -40,7 +40,7 @@ export function GenreView(props) {
 
         <Row className="main-view justify-content-md-center">
 
-          {movies.map(m => {
+          {movies.map(m => { // John: help me understand the map function fully. what is m?
             if (m.Genre.Name === genre.Name) {
               return (
                 <MovieCard key={m._id} movie={m} />
