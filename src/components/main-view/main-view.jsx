@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 
 // #0 imports actions to modify store 
-import { setMovies, setUser, loginUser, logoutUser } from '../../actions/actions';
+import { setMovies, setUser } from '../../actions/actions';
 
 import MovieList from '../movies-list/movies-list';
 
