@@ -1,3 +1,16 @@
+.movie-card {
+  width: 210px;
+  margin: 10px;
+  border: 2px solid grey;
+  border-radius: 7px;
+  background-color: honeydew;
+}
+
+.movie-image:hover {
+  width: 200px;
+  margin: 3px;
+  border: thick double gray;
+}
 .form-login {
   min-height: 100vh;
   display: flex;
