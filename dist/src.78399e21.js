@@ -53789,7 +53789,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "movie-director"
       }, "Director: ", movie.Director.Name), /*#__PURE__*/_react.default.createElement(_reactBootstrap.ListGroupItem, {
         className: "movie-actors"
-      }, "Actors: ", movie.Actors), /*#__PURE__*/_react.default.createElement(_reactBootstrap.ListGroupItem, {
+      }, "Actors: ", movie.Actors.join(', ')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.ListGroupItem, {
         className: "movie-released"
       }, "Released: ", movie.Released)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
         to: "/directors/".concat(movie.Director.Name)
@@ -54861,18 +54861,23 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         id: "responsive-navbar-nav"
       }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Nav, {
         className: "mr-auto"
+      }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, {
+        className: "navBarElements"
       }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
         id: "homeLink",
+        className: "navBarLink",
         to: "/"
-      }, "Home"), " ", /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+      }, "Home"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
         id: "profileLink",
+        className: "navBarLink",
         to: "/profile"
       }, "Profile"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
         variant: "outline-light",
+        className: "navBarLink",
         onClick: function onClick() {
           return _this3.handleLogOut();
         }
-      }, "LogOut"))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, {
+      }, "LogOut")))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, {
         className: "my-3"
       }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
         className: "main-view justify-content-md-center"
@@ -55141,7 +55146,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62089" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59031" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

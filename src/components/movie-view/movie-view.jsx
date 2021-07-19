@@ -49,7 +49,7 @@ export class MovieView extends React.Component {
             Director: {movie.Director.Name}
           </ListGroupItem>
           <ListGroupItem className="movie-actors">
-            Actors: {movie.Actors}
+            Actors: {movie.Actors.join(', ')}
           </ListGroupItem>
           <ListGroupItem className="movie-released">
             Released: {movie.Released}

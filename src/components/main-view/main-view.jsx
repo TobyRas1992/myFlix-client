@@ -97,9 +97,11 @@ class MainView extends React.Component {
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                  <Link id="homeLink" to="/">Home</Link> {/* maybe change this to link bc Andy had to do this later? */}
-                  <Link id="profileLink" to="/profile">Profile</Link>
-                  <Button variant="outline-light" onClick={() => this.handleLogOut()}>LogOut</Button>
+                  <Container className='navBarElements'>
+                    <Link id="homeLink" className='navBarLink' to="/">Home</Link>
+                    <Link id="profileLink" className='navBarLink' to="/profile">Profile</Link>
+                    <Button variant="outline-light" className='navBarLink' onClick={() => this.handleLogOut()}>LogOut</Button>
+                  </Container>
                 </Nav>
               </Navbar.Collapse>
             </Navbar>

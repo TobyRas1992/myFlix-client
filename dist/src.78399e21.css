@@ -6,10 +6,14 @@
   background-color: honeydew;
 }
 
-.movie-image:hover {
+.movie-card:hover {
   width: 200px;
   margin: 3px;
-  border: thick double gray;
+  border: ridge gray;
+}
+
+.movie-image {
+  border: thick black;
 }
 .form-login {
   min-height: 100vh;
@@ -28,6 +32,10 @@
 
 #profileLink {
   color: white;
+}
+
+.navBarLink {
+  margin: 10px;
 }
 .my-flix {
   color: steelblue;
