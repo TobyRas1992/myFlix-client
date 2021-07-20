@@ -8,7 +8,7 @@ Users can sign up, update their information, and add films to their list of favo
 I wanted to built a client-side app that worked together with a movie database that I have built using Node.js, Express, and MongoDB.
 
 ## Demo
-![myFlix Demo](demo/myFlix-demo.gif)
+![myFlix Demo](demo/demo.gif)
 
 ## Tech/framework used
 **Built with**
